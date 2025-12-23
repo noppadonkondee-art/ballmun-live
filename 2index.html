@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BALLMUN - ดูบอลสด</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-main {
+            display: flex;
+            align-items: center;
+            font-size: 40px;
+            font-weight: 900;
+            color: #ffcc00;
+            letter-spacing: -1px;
+        }
+
+        .logo-main span {
+            color: #ffffff;
+            background-color: #333;
+            padding: 0 5px;
+            margin-left: 5px;
+            border-radius: 3px;
+        }
+
+        .sub-logo {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 5px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 10px 20px;
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+        }
+
+        .ch-button {
+            background: linear-gradient(180deg, #333 0%, #000 100%);
+            border: 2px solid #ffcc00;
+            border-radius: 4px;
+            padding: 12px 8px;
+            text-decoration: none;
+            color: #ffcc00;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: 0.2s;
+        }
+
+        .ch-button:active {
+            transform: scale(0.95);
+            background: #ffcc00;
+            color: black;
+        }
+
+        .ch-button span {
+            font-size: 10px;
+            margin-left: 4px;
+            color: #fff;
+        }
+
+        .nav-wrapper {
+            position: fixed;
+            bottom: 60px; /* ปรับให้สูงขึ้นหนีแถบโฆษณา tiiny.host */
+            width: 95%;
+            max-width: 500px;
+            z-index: 9999;
+        }
+
+        .bottom-nav {
+            background: linear-gradient(180deg, #444 0%, #000 100%);
+            border-radius: 15px;
+            border: 1px solid #555;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 5px;
+            position: relative;
+            height: 60px;
+        }
+
+        .nav-item {
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            flex: 1;
+        }
+
+        .nav-label {
+            font-size: 11px;
+        }
+
+        .center-ball {
+            width: 75px;
+            height: 75px;
+            background: url('https://pngimg.com/uploads/football/football_PNG52789.png') no-repeat center;
+            background-size: contain;
+            filter: drop-shadow(0 0 10px #ffcc00);
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .spacer {
+            height: 180px; /* เพิ่มพื้นที่ด้านล่างกันโฆษณาบังปุ่ม */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo-container">
+            <div class="logo-main">BALL<span>MUN</span></div>
+            <div class="sub-logo">บอลมันส์ๆ สำหรับคนมันส์ๆ บอลมันส์สดดอทคอม</div>
+        </div>
+    </div>
+
+    <div class="grid-container">
+        <a href="https://ballmun.net/ch1" class="ch-button">BALL MUN <span>CH1</span></a>
+        <a href="https://ballmun.net/ch2" class="ch-button">BALL MUN <span>CH2</span></a>
+        <a href="https://ballmun.net/ch3" class="ch-button">BALL MUN <span>CH3</span></a>
+        <a href="https://ballmun.net/ch4" class="ch-button">BALL MUN <span>CH4</span></a>
+        <a href="https://ballmun.net/ch5" class="ch-button">BALL MUN <span>CH5</span></a>
+        <a href="https://ballmun.net/ch6" class="ch-button">BALL MUN <span>CH6</span></a>
+        <a href="https://ballmun.net/ch7" class="ch-button">BALL MUN <span>CH7</span></a>
+        <a href="https://ballmun.net/ch8" class="ch-button">BALL MUN <span>CH8</span></a>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="nav-wrapper">
+        <div class="center-ball"></div>
+        <div class="bottom-nav">
+            <a href="ใส่ลิงก์หน้าถ่ายทอดสดรวม" class="nav-item">
+                <div>📺</div>
+                <div class="nav-label">Live</div>
+            </a>
+            <a href="ใส่ลิงก์ตารางบอล" class="nav-item">
+                <div>📅</div>
+                <div class="nav-label">ตารางบอล</div>
+            </a>
+            <div style="flex: 1;"></div> 
+            <a href="ใส่ลิงก์กลุ่ม18บวก" class="nav-item">
+                <div>🔞</div>
+                <div class="nav-label">18+</div>
+            </a>
+            <a href="https://t.me/LiveScoreVip2025_bot" class="nav-item">
+                <div>✈️</div>
+                <div class="nav-label">Telegram</div>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
