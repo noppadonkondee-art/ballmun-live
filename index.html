@@ -17,7 +17,8 @@
     .container {
         max-width: 480px;
         margin: auto;
-        padding: 20px 10px 40px;
+        padding: 20px 10px 30px;
+        position: relative;
     }
 
     .title {
@@ -32,16 +33,19 @@
         justify-content: center;
         align-items: center;
         gap: 8px;
-        margin-bottom: 25px;
+        margin-bottom: 18px;
         color: #f5c542;
         font-weight: bold;
     }
 
+    /* 🔥 ปุ่ม LIVE */
     .live-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 14px;
-        margin-bottom: 30px;
+        margin-bottom: 0; /* ไม่มีช่องว่างใต้ LIVE */
+        position: relative;
+        z-index: 1;
     }
 
     .live-btn {
@@ -65,10 +69,12 @@
         box-shadow: 0 4px 0 #7a0000;
     }
 
-    /* 🔥 โซนนักเตะ */
+    /* ⚽ โซนนักเตะ */
     .players {
         position: relative;
         margin-top: 0;
+        z-index: 5;
+        pointer-events: none; /* ไม่บังปุ่ม */
     }
 
     .players img {
@@ -76,12 +82,13 @@
         max-width: 460px;
         display: block;
         margin: auto;
-        transform: translateY(-40px); /* 👈 ขยับขึ้น */
-        filter: drop-shadow(0 15px 35px rgba(255,200,0,0.45));
+        transform: translateY(-400px); /* 🔥 ชิด LIVE */
+        filter: drop-shadow(0 18px 40px rgba(255,200,0,0.5));
     }
 
+    /* แถบล่าง */
     .bottom-bar {
-        margin-top: 0;
+        margin-top: -40px;
         background: rgba(255,255,255,0.08);
         border-radius: 30px;
         padding: 14px;
@@ -127,18 +134,6 @@
 
         <a href="https://ballmun.net/ch7" class="live-btn">LIVE 7</a>
         <a href="https://ballmun.net/ch8" class="live-btn">LIVE 8</a>
-        <a href="https://t.me/ballmunchat/1" class="live-btn highlight">กลุ่มพูดคุย</a>
-    </div>
-
-    <div class="players">
-        <img src="https://img5.pic.in.th/file/secure-sv1/573b57455c3235e11.png" alt="football players">
-    </div>
-
-    <div class="bottom-bar">
-        <div class="ball">⚽</div>
-    </div>
-
-</div>
-
-</body>
-</html>
+        <a href="https://t.me/ballmunchat/1" class="live-btn highlight">กลุ่มพูดคุย</a></div><div class="players">
+        <img src="https://img5.pic.in.th/file/secure-sv1/573b57455c3235e11.png" alt="football players"> </div><div class="bottom-bar">
+        <div class="ball">⚽</div></div></div></body></html>
