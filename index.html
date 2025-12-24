@@ -3,137 +3,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ดูบอลสด</title>
+<title>ดูบอลสด | BALLMUN</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: radial-gradient(circle at top, #2a2a2a, #000);
-        color: #fff;
-        text-align: center;
-    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-    .container {
-        max-width: 480px;
-        margin: auto;
-        padding: 20px 10px 30px;
-        position: relative;
-    }
+body{
+    background:#000;
+    color:#fff;
+    padding-bottom:70px; /* กันแถบล่างบังเนื้อหา */
+}
 
-    .title {
-        font-size: 42px;
-        font-weight: 800;
-        letter-spacing: 2px;
-        margin-bottom: 5px;
-    }
+/* HEADER */
+.header{
+    text-align:center;
+    padding:30px 10px 20px;
+}
 
-    .brand {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 18px;
-        color: #f5c542;
-        font-weight: bold;
-    }
+.header h1{
+    font-size:48px;
+    color:#f5c400;
+    font-weight:900;
+    letter-spacing:2px;
+    text-shadow:0 0 10px rgba(255,215,0,.6);
+}
 
-    /* 🔥 ปุ่ม LIVE */
-    .live-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 14px;
-        margin-bottom: 0; /* ไม่มีช่องว่างใต้ LIVE */
-        position: relative;
-        z-index: 1;
-    }
+.logo{
+    margin-top:10px;
+    font-size:22px;
+    font-weight:bold;
+}
 
-    .live-btn {
-        background: linear-gradient(180deg, #ffd86b, #d4a72c);
-        color: #000;
-        font-weight: 800;
-        padding: 14px 0;
-        border-radius: 8px;
-        text-decoration: none;
-        box-shadow: 0 4px 0 #8c6a10;
-    }
+.logo span{
+    color:#f5c400;
+}
 
-    .live-btn:active {
-        transform: translateY(2px);
-        box-shadow: 0 2px 0 #8c6a10;
-    }
+/* LIVE GRID */
+.live-container{
+    width:90%;
+    max-width:420px;
+    margin:20px auto;
+}
 
-    .highlight {
-        background: linear-gradient(180deg, #ff4d4d, #c40000);
-        color: #fff;
-        box-shadow: 0 4px 0 #7a0000;
-    }
+.live-row{
+    display:flex;
+    gap:10px;
+    margin-bottom:10px;
+}
 
-    /* ⚽ โซนนักเตะ */
-    .players {
-        position: relative;
-        margin-top: 0;
-        z-index: 5;
-        pointer-events: none; /* ไม่บังปุ่ม */
-    }
+.live-btn{
+    flex:1;
+    background:#3b3b3b;
+    border:1px solid #555;
+    padding:18px 0;
+    text-align:center;
+    border-radius:6px;
+    font-weight:bold;
+    cursor:pointer;
+    text-decoration:none;
+    color:#fff;
+    transition:.2s;
+}
 
-    .players img {
-        width: 100%;
-        max-width: 460px;
-        display: block;
-        margin: auto;
-        transform: translateY(-200px); /* 🔥 ชิด LIVE */
-        filter: drop-shadow(0 18px 40px rgba(255,200,0,0.5));
-    }
+.live-btn:hover{
+    background:#555;
+    transform:scale(1.03);
+}
 
-    /* แถบล่าง */
-    .bottom-bar {
-        margin-top: -40px;
-        background: rgba(255,255,255,0.08);
-        border-radius: 30px;
-        padding: 14px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.chat-btn{
+    background:#f5c400;
+    color:#000;
+}
 
-    .ball {
-        width: 38px;
-        height: 38px;
-        background: #fff;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #000;
-        font-size: 20px;
-        font-weight: bold;
-    }
+/* URL BAR */
+.url-box{
+    width:90%;
+    max-width:420px;
+    margin:20px auto;
+    display:flex;
+}
+
+.url-box input{
+    flex:1;
+    background:#2b2b2b;
+    border:none;
+    padding:14px;
+    color:#ccc;
+    border-radius:6px 0 0 6px;
+}
+
+.url-box button{
+    width:55px;
+    border:none;
+    background:#444;
+    color:#fff;
+    font-size:18px;
+    border-radius:0 6px 6px 0;
+}
+
+/* BOTTOM MENU */
+.bottom-menu{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#111;
+    display:flex;
+    justify-content:space-around;
+    padding:8px 0;
+    border-top:1px solid #333;
+    z-index:999;
+}
+
+.bottom-item{
+    width:20%;
+    text-align:center;
+    font-size:12px;
+    color:#ccc;
+    text-decoration:none;
+}
+
+.bottom-item .icon{
+    font-size:22px;
+    display:block;
+    margin-bottom:4px;
+}
+
+.bottom-item:hover{
+    color:#fff;
+}
+
+.bottom-item.home{
+    color:#f5c400;
+}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="header">
+    <h1>ดูบอลสด</h1>
+    <div class="logo">
+        <span>⚽ BALLMUN</span><br>
+        บอลสด สำหรับคนมันส์ๆ บอลมันส์ดอทคอม
+    </div>
+</div>
 
-    <div class="title">ดูบอลสด</div>
+<div class="live-container">
 
-    <div class="brand">
-        <span>⚽</span>
-        <span>BALMUN</span>
+    <div class="live-row">
+        <a href="https://ballmun.net/ch1" class="live-btn" target="_blank">LIVE 1</a>
+        <a href="https://ballmun.net/ch2" class="live-btn" target="_blank">LIVE 2</a>
+        <a href="https://ballmun.net/ch3" class="live-btn" target="_blank">LIVE 3</a>
     </div>
 
-    <div class="live-grid">
-        <a href="https://ballmun.net/ch1" class="live-btn">LIVE 1</a>
-        <a href="https://ballmun.net/ch2" class="live-btn">LIVE 2</a>
-        <a href="https://ballmun.net/ch3" class="live-btn">LIVE 3</a>
+    <div class="live-row">
+        <a href="https://ballmun.net/ch4" class="live-btn" target="_blank">LIVE 4</a>
+        <a href="https://ballmun.net/ch5" class="live-btn" target="_blank">LIVE 5</a>
+        <a href="https://ballmun.net/ch6" class="live-btn" target="_blank">LIVE 6</a>
+    </div>
 
-        <a href="https://ballmun.net/ch4" class="live-btn">LIVE 4</a>
-        <a href="https://ballmun.net/ch5" class="live-btn">LIVE 5</a>
-        <a href="https://ballmun.net/ch6" class="live-btn">LIVE 6</a>
+    <div class="live-row">
+        <a href="https://ballmun.net/ch7" class="live-btn" target="_blank">LIVE 7</a>
+        <a href="https://ballmun.net/ch8" class="live-btn" target="_blank">LIVE 8</a>
+        <a href="https://https://t.me/ballmunchat/1" class="live-btn chat-btn" target="_blank">กลุ่มพูดคุย</a>
+    </div>
 
-        <a href="https://ballmun.net/ch7" class="live-btn">LIVE 7</a>
-        <a href="https://ballmun.net/ch8" class="live-btn">LIVE 8</a>
-        <a href="https://t.me/ballmunchat/1" class="live-btn highlight">กลุ่มพูดคุย</a></div><div class="players">
-        <img src="https://img5.pic.in.th/file/secure-sv1/573b57455c3235e11.png" alt="football players"> </div><div class="bottom-bar">
-        <div class="ball">⚽</div></div></div></body></html>
+</div>
+
+<div class="url-box">
+    <input type="text" value="WWW.BALLMUN.COM" readonly>
+    <button>🔍</button>
+</div>
+
+<!-- BOTTOM MENU -->
+<div class="url-box">
+
+    <a href="https://t.me/ballmunn.html" class="bottom-item">
+        <span class="icon">⚽</span>
+        โปรแกรมบอล
+    </a>
+
+    <a href="https://ballmun.net/news.html" class="bottom-item">
+        <span class="icon">📰</span>
+        ข่าวฟุตบอล
+    </a>
+
+    <a href="https://ballmun.net/.html" class="bottom-item home">
+        <span class="icon">🏠</span>
+        หน้าแรก
+    </a>
+
+    <a href="https://nai-warp.net/.html" class="bottom-item">
+        <span class="icon">💋</span>
+        18+
+    </a>
+
+    <a href="https://wallet.sbobetwc.net/WCMB/.html" class="bottom-item">
+        <span class="icon">💰</span>
+        เดิมพันกีฬา
+    </a>
+
+</div>
+
+</body>
+</html>
