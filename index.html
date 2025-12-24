@@ -16,32 +16,33 @@
 body{
     color:#fff;
     padding-bottom:70px;
+    background:#000; /* พื้นหลังส่วนล่าง */
+}
 
-    /* BACKGROUND IMAGE (1080x1932) */
-    background-image: url("https://img2.pic.in.th/pic/-2025-12-23-135727-Recovered5d551dae8a1c3c3e.jpg");
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: cover;
-    min-height:100vh;
+/* ===== BACKGROUND TOP (จบที่รูปนักเตะ) ===== */
+.bg-top{
+    background-image:url("https://img5.pic.in.th/file/secure-sv1/bgg7c091b1fa5aeffa7.png");
+    background-repeat:no-repeat;
+    background-position:center top;
+    background-size:cover;
 }
 
 /* HEADER LOGO */
 .header{
     text-align:center;
-    padding:30px 10px 15px;
+    padding:30px 10px 10px;
 }
 
 .header img{
     max-width:220px;
     width:100%;
-    height:auto;
 }
 
 /* LIVE GRID */
 .live-container{
     width:90%;
     max-width:420px;
-    margin:20px auto;
+    margin:0 auto 20px;
 }
 
 .live-row{
@@ -50,56 +51,64 @@ body{
     margin-bottom:10px;
 }
 
+/* IMAGE BUTTON */
 .live-btn{
     flex:1;
-    background:rgba(59,59,59,.85);
-    border:1px solid #555;
-    padding:18px 0;
-    text-align:center;
-    border-radius:6px;
-    font-weight:bold;
-    text-decoration:none;
-    color:#fff;
-    transition:.2s;
+    position:relative;
+    overflow:hidden;
+    border-radius:8px;
 }
 
-.live-btn:hover{
-    background:rgba(90,90,90,.9);
-    transform:scale(1.03);
+.live-btn img{
+    width:100%;
+    display:block;
+    border-radius:8px;
+    transition:.25s ease;
 }
 
-.chat-btn{
-    background:#f5c400;
-    color:#000;
+/* เอฟเฟกต์ไฟ */
+.live-btn:hover img{
+    transform:scale(1.06);
+    box-shadow:
+        0 0 10px #f5c400,
+        0 0 25px #f5c400,
+        0 0 45px rgba(245,196,0,.9);
 }
 
-/* URL BAR */
-.url-box{
+.live-btn:active img{
+    transform:scale(0.95);
+    box-shadow:
+        0 0 15px #fff,
+        0 0 35px #f5c400,
+        0 0 60px #f5c400;
+}
+
+/* www.ballmun.com */
+.image-bar{
     width:90%;
     max-width:420px;
-    margin:20px auto;
-    display:flex;
+    margin:10px auto 0;
 }
 
-.url-box input{
-    flex:1;
-    background:rgba(43,43,43,.85);
-    border:none;
-    padding:14px;
-    color:#ccc;
-    border-radius:6px 0 0 6px;
+.image-bar img{
+    width:100%;
+    display:block;
+    border-radius:8px;
 }
 
-.url-box button{
-    width:55px;
-    border:none;
-    background:rgba(68,68,68,.85);
-    color:#fff;
-    font-size:18px;
-    border-radius:0 6px 6px 0;
+/* รูปนักเตะ (ตัวจบพื้นหลัง) */
+.player-banner{
+    width:90%;
+    max-width:420px;
+    margin:5px auto 0;
 }
 
-/* BOTTOM MENU */
+.player-banner img{
+    width:100%;
+    display:block;
+}
+
+/* ===== BOTTOM MENU ===== */
 .bottom-menu{
     position:fixed;
     bottom:0;
@@ -127,10 +136,6 @@ body{
     margin-bottom:2px;
 }
 
-.bottom-item:hover{
-    color:#fff;
-}
-
 .bottom-item.home{
     color:#f5c400;
 }
@@ -139,57 +144,58 @@ body{
 
 <body>
 
-<!-- LOGO -->
-<div class="header">
-    <a href="https://ballmun.net/">
-        <img src="https://img2.pic.in.th/pic/23a04a0f8ca705ff7.png" alt="BALLMUN LOGO">
-    </a>
-</div>
+<!-- ===== พื้นหลังบน (จบตรงรูปนักเตะ) ===== -->
+<div class="bg-top">
 
-<!-- LIVE BUTTONS -->
-<div class="live-container">
-    <div class="live-row">
-        <a href="https://ballmun.net/ch1" class="live-btn">LIVE 1</a>
-        <a href="https://ballmun.net/ch2" class="live-btn">LIVE 2</a>
-        <a href="https://ballmun.net/ch3" class="live-btn">LIVE 3</a>
+    <!-- LOGO -->
+    <div class="header">
+        <a href="https://ballmun.net/">
+            <img src="https://img2.pic.in.th/pic/23a04a0f8ca705ff7.png">
+        </a>
     </div>
 
-    <div class="live-row">
-        <a href="https://ballmun.net/ch4" class="live-btn">LIVE 4</a>
-        <a href="https://ballmun.net/ch5" class="live-btn">LIVE 5</a>
-        <a href="https://ballmun.net/ch6" class="live-btn">LIVE 6</a>
+    <!-- LIVE BUTTONS -->
+    <div class="live-container">
+
+        <div class="live-row">
+            <a href="https://ballmun.net/ch1" class="live-btn"><img src="https://img5.pic.in.th/file/secure-sv1/-12b4e5913a8065405.png"></a>
+            <a href="https://ballmun.net/ch2" class="live-btn"><img src="https://img2.pic.in.th/pic/Artboard-288fc9bcc587f33da.png"></a>
+            <a href="https://ballmun.net/ch3" class="live-btn"><img src="https://img2.pic.in.th/pic/Artboard-33997a8ce5e0a22e7.png"></a>
+        </div>
+
+        <div class="live-row">
+            <a href="https://ballmun.net/ch4" class="live-btn"><img src="https://img5.pic.in.th/file/secure-sv1/Artboard-65f88e4f8e468be89.png"></a>
+            <a href="https://ballmun.net/ch5" class="live-btn"><img src="https://img2.pic.in.th/pic/Artboard-5558fb82a739638c2.png"></a>
+            <a href="https://ballmun.net/ch6" class="live-btn"><img src="https://img5.pic.in.th/file/secure-sv1/Artboard-4e1144d6ae48bdb3c.png"></a>
+        </div>
+
+        <div class="live-row">
+            <a href="https://ballmun.net/ch7" class="live-btn"><img src="https://img2.pic.in.th/pic/Artboard-9b326bc3431f5b888.png"></a>
+            <a href="https://ballmun.net/ch8" class="live-btn"><img src="https://img5.pic.in.th/file/secure-sv1/Artboard-820190f735d538db9.png"></a>
+            <a href="https://t.me/ballmunchat/1" class="live-btn"><img src="https://img2.pic.in.th/pic/Artboard-75a1500be75d338ff.png"></a>
+        </div>
+
     </div>
 
-    <div class="live-row">
-        <a href="https://ballmun.net/ch7" class="live-btn">LIVE 7</a>
-        <a href="https://ballmun.net/ch8" class="live-btn">LIVE 8</a>
-        <a href="https://t.me/ballmunchat/1" class="live-btn chat-btn">กลุ่มพูดคุย</a>
+    <!-- www.ballmun.com -->
+    <div class="image-bar">
+        <img src="https://img5.pic.in.th/file/secure-sv1/Untitled-3f7247734d3154067.png">
     </div>
+
+    <!-- รูปนักเตะ (จบพื้นหลังพอดีตรงนี้) -->
+    <div class="player-banner">
+        <img src="https://img5.pic.in.th/file/secure-sv1/Blue-and-White-Modern-Sports-News-Instagram-Reel-10c44b8abd1349e51a.png">
+    </div>
+
 </div>
 
-<!-- URL -->
-<div class="url-box">
-    <input type="text" value="WWW.BALLMUN.COM" readonly>
-    <button>🔍</button>
-</div>
-
-<!-- BOTTOM MENU -->
+<!-- ===== BOTTOM MENU ===== -->
 <div class="bottom-menu">
-    <a href="https://t.me/ballmunn" class="bottom-item">
-        <span class="icon">⚽</span>โปรแกรมบอล
-    </a>
-    <a href="https://ballmun.net/news" class="bottom-item">
-        <span class="icon">📰</span>ข่าวฟุตบอล
-    </a>
-    <a href="https://ballmun.net/" class="bottom-item home">
-        <span class="icon">🏠</span>หน้าแรก
-    </a>
-    <a href="https://nai-warp.net/" class="bottom-item">
-        <span class="icon">💋</span>18+
-    </a>
-    <a href="https://wallet.sbobetwc.net/WCMB/" class="bottom-item">
-        <span class="icon">💰</span>เดิมพันกีฬา
-    </a>
+    <a href="https://t.me/ballmunn" class="bottom-item"><span class="icon">⚽</span>โปรแกรมบอล</a>
+    <a href="https://ballmun.net/news" class="bottom-item"><span class="icon">📰</span>ข่าวฟุตบอล</a>
+    <a href="https://ballmun.net/" class="bottom-item home"><span class="icon">🏠</span>หน้าแรก</a>
+    <a href="https://nai-warp.net/" class="bottom-item"><span class="icon">💋</span>18+</a>
+    <a href="https://wallet.sbobetwc.net/WCMB/" class="bottom-item"><span class="icon">💰</span>เดิมพันกีฬา</a>
 </div>
 
 </body>
