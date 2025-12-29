@@ -7,20 +7,9 @@
 
 <style>
 * { box-sizing: border-box; font-family: Arial, sans-serif; }
-
-body {
-  margin: 0;
-  background: #1e1e1e;
-  color: #fff;
-}
-
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
+body { margin: 0; background: #1e1e1e; color: #fff; }
+a { text-decoration: none; color: inherit; display: block; }
+img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .app { max-width: 420px; margin: auto; }
 
 /* Header */
@@ -87,37 +76,37 @@ img {
   color: #000;
 }
 
-/* ===== IFRAME OVERLAY ===== */
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.85);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+/* ===== ไฮไลท์ฟุตบอล (overlay iframe) ===== */
+.highlight-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
 }
-.overlay.active { display: flex; }
+.highlight-overlay.active{display:flex}
 
-.player-box {
-  width: 95%;
-  max-width: 720px;
-  background: #000;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
+.highlight-player{
+  width:95%;
+  max-width:800px;
+  background:#000;
+  border-radius:12px;
+  overflow:hidden;
+  position:relative;
 }
-.player-box iframe {
-  width: 100%;
-  height: 240px;
-  border: 0;
+.highlight-player iframe{
+  width:100%;
+  height:260px;
+  border:0;
 }
-.close-btn {
-  position: absolute;
-  top: 6px;
-  right: 12px;
-  font-size: 22px;
-  cursor: pointer;
+.highlight-close{
+  position:absolute;
+  top:6px;
+  right:12px;
+  font-size:22px;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -136,19 +125,14 @@ img {
 <div class="section">
   <div class="section-title">
     <span>พรีเมียร์ลีก</span>
-    <span style="color:#aaa;font-size:14px;">คลิกดู ▶</span>
+    <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span>
   </div>
 
   <div class="horizontal-list">
-    <div class="card" onclick="openPlayer('https://ballmun.net/ch1')">
-      <div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div>
-      <div class="card-footer"><span>เชลซี vs บอร์นมัธ</span><span>02:30</span></div>
-    </div>
-
-    <div class="card" onclick="openPlayer('https://ballmun.net/ch1')">
-      <div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div>
-      <div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน</span><span>02:30</span></div>
-    </div>
+    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div></a><div class="card-footer"><span>เชลซี vs บอร์นมัธ</span><span>02:30</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div></a><div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน</span><span>02:30</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img2.pic.in.th/ben.png"></div></a><div class="card-footer"><span>เบิร์นลีย์ vs นิวคาสเซิ่ล</span><span>02:30</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/for71218c82954a3b62.png"></div></a><div class="card-footer"><span>ฟอเรสต์ vs เอฟเวอร์ตัน</span><span>02:30</span></div></div>
   </div>
 </div>
 
@@ -164,19 +148,14 @@ img {
 <div class="section">
   <div class="section-title">
     <span>โปรแกรมบอลวันนี้</span>
-    <span style="color:#aaa;font-size:14px;">คลิกดู ▶</span>
+    <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span>
   </div>
 
   <div class="horizontal-list">
-    <div class="card" onclick="openPlayer('https://ballmun.net/ch2')">
-      <div class="card-img"><img src="https://img2.pic.in.th/co.png"></div>
-      <div class="card-footer"><span>ทีม A vs B</span><span>20:00</span></div>
-    </div>
-
-    <div class="card" onclick="openPlayer('https://ballmun.net/ch3')">
-      <div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/sam.png"></div>
-      <div class="card-footer"><span>ทีม C vs D</span><span>22:00</span></div>
-    </div>
+    <div class="card"><a href="https://ballmun.net/ch4"><div class="card-img"><img src="https://img2.pic.in.th/roms.png"></div></a><div class="card-footer"><span>ทีม A vs B</span><span>20:00</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/anb77fb18905a24b45.png"></div></a><div class="card-footer"><span>ทีม C vs D</span><span>22:00</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/sam.png"></div></a><div class="card-footer"><span>ทีม E vs F</span><span>00:00</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img2.pic.in.th/co.png"></div></a><div class="card-footer"><span>ทีม G vs H</span><span>02:00</span></div></div>
   </div>
 </div>
 
@@ -188,12 +167,14 @@ img {
   </div>
 
   <div class="horizontal-list">
-    <div class="card" onclick="openPlayer('https://www.youtube.com/embed/VIDEO_ID_1')">
+    <div class="card"
+      onclick="openHighlight('https://www.youtube.com/embed/Y2nVTYQZvEo')">
       <div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+1"></div>
-      <div class="card-footer"><span>คู่เดือดเมื่อคืน</span><span>▶</span></div>
+      <div class="card-footer"><span>ไฮไลท์คู่เดือด</span><span>▶</span></div>
     </div>
 
-    <div class="card" onclick="openPlayer('https://www.youtube.com/embed/VIDEO_ID_2')">
+    <div class="card"
+      onclick="openHighlight('https://www.youtube.com/embed/VIDEO_ID_2')">
       <div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+2"></div>
       <div class="card-footer"><span>ประตูสวย</span><span>▶</span></div>
     </div>
@@ -202,23 +183,22 @@ img {
 
 </div>
 
-<!-- PLAYER -->
-<div class="overlay" id="overlay">
-  <div class="player-box">
-    <div class="close-btn" onclick="closePlayer()">✕</div>
-    <iframe id="player" src="" allowfullscreen></iframe>
+<!-- Overlay -->
+<div class="highlight-overlay" id="highlightOverlay">
+  <div class="highlight-player">
+    <div class="highlight-close" onclick="closeHighlight()">✕</div>
+    <iframe id="highlightFrame" allowfullscreen></iframe>
   </div>
 </div>
 
 <script>
-function openPlayer(url) {
-  document.getElementById('player').src = url;
-  document.getElementById('overlay').classList.add('active');
+function openHighlight(url){
+  document.getElementById('highlightFrame').src = url;
+  document.getElementById('highlightOverlay').classList.add('active');
 }
-
-function closePlayer() {
-  document.getElementById('player').src = '';
-  document.getElementById('overlay').classList.remove('active');
+function closeHighlight(){
+  document.getElementById('highlightFrame').src = '';
+  document.getElementById('highlightOverlay').classList.remove('active');
 }
 </script>
 
