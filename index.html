@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* { box-sizing: border-box; font-family: Arial, sans-serif; }
+* { box-sizing: border-box; font-family: Arial,sans-serif; }
 body { margin: 0; background: #1e1e1e; color: #fff; }
 a { text-decoration: none; color: inherit; display: block; }
 img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -46,6 +46,7 @@ img { width: 100%; height: 100%; object-fit: cover; display: block; }
   background: #2a2a2a;
   border-radius: 16px;
   overflow: hidden;
+  cursor: pointer;
 }
 .card-img { height: 110px; }
 .card-footer {
@@ -75,37 +76,20 @@ img { width: 100%; height: 100%; object-fit: cover; display: block; }
   color: #000;
 }
 
-/* ====== เพิ่มเฉพาะไฮไลท์ฟุตบอล ====== */
-.highlight-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.9);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-.highlight-overlay.active{display:flex}
-
+/* ไฮไลท์ฟุตบอล */
 .highlight-player{
-  width:95%;
-  max-width:800px;
-  background:#000;
-  border-radius:12px;
-  overflow:hidden;
-  position:relative;
+  width: 100%;
+  margin-top: 14px;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  display: none;
 }
-.highlight-player iframe{
-  width:100%;
-  height:260px;
-  border:0;
-}
-.highlight-close{
-  position:absolute;
-  top:6px;
-  right:12px;
-  font-size:22px;
-  cursor:pointer;
+.highlight-player iframe,
+.highlight-player video{
+  width: 100%;
+  height: 230px;
+  border: 0;
 }
 </style>
 </head>
@@ -120,22 +104,21 @@ img { width: 100%; height: 100%; object-fit: cover; display: block; }
   <div class="profile"></div>
 </div>
 
-<!-- พรีเมียร์ลีก (เหมือนเดิม) -->
+<!-- พรีเมียร์ลีก -->
 <div class="section">
   <div class="section-title">
     <span>พรีเมียร์ลีก</span>
     <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span>
   </div>
-
   <div class="horizontal-list">
     <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div></a><div class="card-footer"><span>เชลซี vs บอร์นมัธ</span><span>02:30</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div></a><div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน</span><span>02:30</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img2.pic.in.th/ben.png"></div></a><div class="card-footer"><span>เบิร์นลีย์ vs นิวคาสเซิ่ล</span><span>02:30</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/for71218c82954a3b62.png"></div></a><div class="card-footer"><span>ฟอเรสต์ vs เอฟเวอร์ตัน</span><span>02:30</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div></a><div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน</span><span>02:30</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch3"><div class="card-img"><img src="https://img2.pic.in.th/ben.png"></div></a><div class="card-footer"><span>เบิร์นลีย์ vs นิวคาสเซิ่ล</span><span>02:30</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch4"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/for71218c82954a3b62.png"></div></a><div class="card-footer"><span>ฟอเรสต์ vs เอฟเวอร์ตัน</span><span>02:30</span></div></div>
   </div>
 </div>
 
-<!-- Categories (เหมือนเดิม) -->
+<!-- Categories -->
 <div class="categories">
   <a href="program.html" class="active">โปรแกรมบอล</a>
   <a href="tip.html">ทีเด็ดบอล</a>
@@ -143,13 +126,12 @@ img { width: 100%; height: 100%; object-fit: cover; display: block; }
   <a href="highlight.html">กีฬาอื่นๆ</a>
 </div>
 
-<!-- โปรแกรมบอลวันนี้ (ครบ 4 คู่ เหมือนเดิม) -->
+<!-- โปรแกรมบอลวันนี้ -->
 <div class="section">
   <div class="section-title">
     <span>โปรแกรมบอลวันนี้</span>
     <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span>
   </div>
-
   <div class="horizontal-list">
     <div class="card"><a href="https://ballmun.net/ch4"><div class="card-img"><img src="https://img2.pic.in.th/roms.png"></div></a><div class="card-footer"><span>ทีม A vs B</span><span>20:00</span></div></div>
     <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/anb77fb18905a24b45.png"></div></a><div class="card-footer"><span>ทีม C vs D</span><span>22:00</span></div></div>
@@ -164,25 +146,22 @@ img { width: 100%; height: 100%; object-fit: cover; display: block; }
     <span>ไฮไลท์ฟุตบอล</span>
     <span style="color:#aaa;font-size:14px;">คลิกดู ▶</span>
   </div>
-
   <div class="horizontal-list">
     <div class="card highlight-card" data-video="https://youtu.be/Y2nVTYQZvEo?si=Z05zJGt8Vsy9ZCIG">
       <div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+1"></div>
       <div class="card-footer"><span>ไฮไลท์คู่ที่ 1</span><span>▶</span></div>
     </div>
-
     <div class="card highlight-card" data-video="https://www.youtube.com/embed/Y2nVTYQZvEo">
       <div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+2"></div>
       <div class="card-footer"><span>ไฮไลท์คู่ที่ 2</span><span>▶</span></div>
     </div>
-
     <div class="card highlight-card" data-video="https://yourdomain.com/video.mp4">
       <div class="card-img"><img src="https://via.placeholder.com/300?text=MP4"></div>
       <div class="card-footer"><span>ไฮไลท์ MP4</span><span>▶</span></div>
     </div>
   </div>
 
-  <!-- ตัวเล่นวิดีโอ (มีแค่อันเดียว) -->
+  <!-- ตัวเล่นวีดีโอ -->
   <div class="highlight-player" id="highlightPlayer"></div>
 </div>
 
@@ -193,21 +172,25 @@ const playerBox = document.getElementById('highlightPlayer');
 
 document.querySelectorAll('.highlight-card').forEach(card=>{
   card.addEventListener('click',()=>{
+    let url = card.dataset.video;
 
-    const url = card.dataset.video;
-    playerBox.style.display = 'block';
+    // แปลง youtu.be เป็น embed
+    if(url.includes('youtu.be')){
+      const id = url.split('/').pop().split('?')[0];
+      url = `https://www.youtube.com/embed/${id}`;
+    }
 
     if(url.endsWith('.mp4')){
       playerBox.innerHTML =
-        `<video src="${url}" controls autoplay playsinline></video>`;
-    }else{
+        `<video src="${url}" controls autoplay playsinline style="width:100%; height:230px;"></video>`;
+    } else {
       playerBox.innerHTML =
         `<iframe src="${url}?autoplay=1&mute=1"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>`;
     }
 
-    playerBox.scrollIntoView({behavior:'smooth', block:'start'});
+    playerBox.style.display = 'block';
   });
 });
 </script>
