@@ -6,86 +6,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* { box-sizing: border-box; font-family: Arial, sans-serif; }
-body { margin: 0; background: #1e1e1e; color: #fff; }
-a { text-decoration: none; color: inherit; display: block; }
-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.app { max-width: 420px; margin: auto; }
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#1e1e1e;color:#fff}
+a{text-decoration:none;color:inherit;display:block}
+img{width:100%;height:100%;object-fit:cover}
+.app{max-width:420px;margin:auto}
 
 /* Header */
-.header {
-  background: #e39a2d;
-  padding: 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.menu { font-size: 22px; color: #000; }
-.title { font-size: 20px; font-weight: bold; color: #000; }
-.profile { width: 36px; height: 36px; background: #fff; border-radius: 50%; }
+.header{background:#e39a2d;padding:14px;display:flex;justify-content:space-between;align-items:center}
+.menu{font-size:22px;color:#000}
+.title{font-size:20px;font-weight:bold;color:#000}
+.profile{width:36px;height:36px;background:#fff;border-radius:50%}
 
 /* Section */
-.section { padding: 16px; }
-.section-title {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
+.section{padding:16px}
+.section-title{display:flex;justify-content:space-between;margin-bottom:12px}
 
-/* Horizontal list */
-.horizontal-list {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding-bottom: 6px;
-}
+/* Horizontal */
+.horizontal-list{display:flex;gap:12px;overflow-x:auto}
 
 /* Card */
-.card {
-  min-width: 180px;
-  background: #2a2a2a;
-  border-radius: 16px;
-  overflow: hidden;
-}
-.card-img { height: 110px; }
-.card-footer {
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-}
+.card{min-width:180px;background:#2a2a2a;border-radius:16px;overflow:hidden;cursor:pointer}
+.card-img{height:110px}
+.card-footer{padding:10px;display:flex;justify-content:space-between;font-size:14px}
 
 /* Categories */
-.categories {
-  display: flex;
-  gap: 10px;
-  padding: 0 16px;
-  margin-bottom: 16px;
-}
-.categories a {
-  background: #444;
-  padding: 10px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  white-space: nowrap;
-}
-.categories a.active {
-  background: #e39a2d;
-  color: #000;
-}
+.categories{display:flex;gap:10px;padding:0 16px;margin-bottom:16px}
+.categories a{background:#444;padding:10px 16px;border-radius:20px;font-size:14px}
+.categories a.active{background:#e39a2d;color:#000}
 
-/* ===== เพิ่มเฉพาะไฮไลท์ฟุตบอล ===== */
-.highlight-player{
+/* ===== ไฮไลท์ฟุตบอล (เหมือนตัวอย่างคุณ) ===== */
+.iframeBox{
   margin-top:10px;
-  background:#000;
   border-radius:12px;
   overflow:hidden;
+  background:#000;
 }
-.highlight-player iframe,
-.highlight-player video{
+.iframeBox iframe{
   width:100%;
   height:220px;
   border:0;
+}
+
+.image-bar img{
+  width:100%;
+  display:block;
+  border-radius:12px;
+  margin-top:8px;
 }
 </style>
 </head>
@@ -93,69 +60,56 @@ img { width: 100%; height: 100%; object-fit: cover; display: block; }
 <body>
 <div class="app">
 
-<!-- Header -->
 <div class="header">
   <div class="menu">☰</div>
   <div class="title">Ballmun.com</div>
   <div class="profile"></div>
 </div>
 
-<!-- พรีเมียร์ลีก (ครบเหมือนเดิม) -->
+<!-- พรีเมียร์ลีก (เหมือนเดิม) -->
 <div class="section">
   <div class="section-title">
-    <span>พรีเมียร์ลีก</span>
-    <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span>
+    <span>พรีเมียร์ลีก</span><span style="color:#aaa">เลื่อนดู ›</span>
   </div>
-
   <div class="horizontal-list">
-    <div class="card"><a href="#"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div></a><div class="card-footer"><span>เชลซี vs บอร์นมัธ</span><span>02:30</span></div></div>
-    <div class="card"><a href="#"><div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div></a><div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน</span><span>02:30</span></div></div>
-    <div class="card"><a href="#"><div class="card-img"><img src="https://img2.pic.in.th/ben.png"></div></a><div class="card-footer"><span>เบิร์นลีย์ vs นิวคาสเซิ่ล</span><span>02:30</span></div></div>
-    <div class="card"><a href="#"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/for71218c82954a3b62.png"></div></a><div class="card-footer"><span>ฟอเรสต์ vs เอฟเวอร์ตัน</span><span>02:30</span></div></div>
+    <div class="card"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div><div class="card-footer"><span>เชลซี vs บอร์นมัธ</span><span>02:30</span></div></div>
+    <div class="card"><div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div><div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน</span><span>02:30</span></div></div>
+    <div class="card"><div class="card-img"><img src="https://img2.pic.in.th/ben.png"></div><div class="card-footer"><span>เบิร์นลีย์ vs นิวคาสเซิ่ล</span><span>02:30</span></div></div>
+    <div class="card"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/for71218c82954a3b62.png"></div><div class="card-footer"><span>ฟอเรสต์ vs เอฟเวอร์ตัน</span><span>02:30</span></div></div>
   </div>
 </div>
 
-<!-- Categories -->
 <div class="categories">
-  <a href="#" class="active">โปรแกรมบอล</a>
-  <a href="#">ทีเด็ดบอล</a>
-  <a href="#">ผลบอลสด</a>
-  <a href="#">กีฬาอื่นๆ</a>
+  <a class="active">โปรแกรมบอล</a>
+  <a>ทีเด็ดบอล</a>
+  <a>ผลบอลสด</a>
+  <a>กีฬาอื่นๆ</a>
 </div>
 
-<!-- โปรแกรมบอลวันนี้ (ครบทุกคู่) -->
+<!-- โปรแกรมบอลวันนี้ (เหมือนเดิม) -->
 <div class="section">
   <div class="section-title">
-    <span>โปรแกรมบอลวันนี้</span>
-    <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span>
+    <span>โปรแกรมบอลวันนี้</span><span style="color:#aaa">เลื่อนดู ›</span>
+  </div>
+  <div class="horizontal-list">
+    <div class="card"><div class="card-img"><img src="https://img2.pic.in.th/roms.png"></div><div class="card-footer"><span>ทีม A vs B</span><span>20:00</span></div></div>
+    <div class="card"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/anb77fb18905a24b45.png"></div><div class="card-footer"><span>ทีม C vs D</span><span>22:00</span></div></div>
+    <div class="card"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/sam.png"></div><div class="card-footer"><span>ทีม E vs F</span><span>00:00</span></div></div>
+    <div class="card"><div class="card-img"><img src="https://img2.pic.in.th/co.png"></div><div class="card-footer"><span>ทีม G vs H</span><span>02:00</span></div></div>
+  </div>
+</div>
+
+<!-- ไฮไลท์ฟุตบอล -->
+<div class="section">
+  <div class="section-title">
+    <span>ไฮไลท์ฟุตบอล</span><span style="color:#aaa">คลิกดู ▶</span>
   </div>
 
   <div class="horizontal-list">
-    <div class="card"><a href="#"><div class="card-img"><img src="https://img2.pic.in.th/roms.png"></div></a><div class="card-footer"><span>ทีม A vs B</span><span>20:00</span></div></div>
-    <div class="card"><a href="#"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/anb77fb18905a24b45.png"></div></a><div class="card-footer"><span>ทีม C vs D</span><span>22:00</span></div></div>
-    <div class="card"><a href="#"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/sam.png"></div></a><div class="card-footer"><span>ทีม E vs F</span><span>00:00</span></div></div>
-    <div class="card"><a href="#"><div class="card-img"><img src="https://img2.pic.in.th/co.png"></div></a><div class="card-footer"><span>ทีม G vs H</span><span>02:00</span></div></div>
-  </div>
-</div>
-
-<!-- ไฮไลท์ฟุตบอล (แก้เฉพาะจุดนี้) -->
-<div class="section">
-  <div class="section-title">
-    <span>ไฮไลท์ฟุตบอล</span>
-    <span style="color:#aaa;font-size:14px;">คลิกดู ▶</span>
-  </div>
-
-  <div class="horizontal-list">
-    <div class="card highlight-card"
-         data-video="https://www.youtube.com/embed/Y2nVTYQZvEo">
-      <div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+1"></div>
+    <div class="card highlight"
+      data-video="https://www.youtube.com/embed/DGrlepMcbC4">
+      <div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight"></div>
       <div class="card-footer"><span>ไฮไลท์คู่เดือด</span><span>▶</span></div>
-    </div>
-
-    <div class="card highlight-card"
-         data-video="https://yourdomain.com/highlight.mp4">
-      <div class="card-img"><img src="https://via.placeholder.com/300?text=MP4"></div>
-      <div class="card-footer"><span>ไฮไลท์ MP4</span><span>▶</span></div>
     </div>
   </div>
 </div>
@@ -163,22 +117,31 @@ img { width: 100%; height: 100%; object-fit: cover; display: block; }
 </div>
 
 <script>
-document.querySelectorAll('.highlight-card').forEach(card=>{
-  card.addEventListener('click',()=>{
-    document.querySelectorAll('.highlight-player').forEach(p=>p.remove());
+document.querySelectorAll('.highlight').forEach(card=>{
+  card.onclick = ()=>{
+    document.querySelectorAll('.iframeBox').forEach(v=>v.remove());
 
     const url = card.dataset.video;
-    const player = document.createElement('div');
-    player.className = 'highlight-player';
 
-    if(url.endsWith('.mp4')){
-      player.innerHTML = `<video src="${url}" controls autoplay playsinline></video>`;
-    }else{
-      player.innerHTML = `<iframe src="${url}?autoplay=1" allowfullscreen></iframe>`;
-    }
+    const box = document.createElement('div');
+    box.innerHTML = `
+      <div class="iframeBox">
+        <iframe
+          src="${url}?autoplay=1&mute=1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
 
-    card.after(player);
-  });
+      <div class="image-bar">
+        <a href="https://ballmun.net" target="_blank">
+          <img src="https://img5.pic.in.th/file/secure-sv1/Untitled-3f7247734d3154067.png">
+        </a>
+      </div>
+    `;
+
+    card.after(box);
+  };
 });
 </script>
 
