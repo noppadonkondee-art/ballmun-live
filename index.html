@@ -14,8 +14,6 @@ body {
   color: #fff;
 }
 
-a { text-decoration: none; color: inherit; display: block; }
-
 img {
   width: 100%;
   height: 100%;
@@ -33,7 +31,6 @@ img {
   justify-content: space-between;
   align-items: center;
 }
-
 .menu { font-size: 22px; color: #000; }
 .title { font-size: 20px; font-weight: bold; color: #000; }
 .profile { width: 36px; height: 36px; background: #fff; border-radius: 50%; }
@@ -60,10 +57,9 @@ img {
   background: #2a2a2a;
   border-radius: 16px;
   overflow: hidden;
+  cursor: pointer;
 }
-
 .card-img { height: 110px; }
-
 .card-footer {
   padding: 10px;
   display: flex;
@@ -71,14 +67,13 @@ img {
   font-size: 14px;
 }
 
-/* Categories (คลิกลิงก์ได้) */
+/* Categories */
 .categories {
   display: flex;
   gap: 10px;
   padding: 0 16px;
   margin-bottom: 16px;
 }
-
 .categories a {
   background: #444;
   padding: 10px 16px;
@@ -87,10 +82,42 @@ img {
   font-size: 14px;
   white-space: nowrap;
 }
-
 .categories a.active {
   background: #e39a2d;
   color: #000;
+}
+
+/* ===== IFRAME OVERLAY ===== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.overlay.active { display: flex; }
+
+.player-box {
+  width: 95%;
+  max-width: 720px;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+.player-box iframe {
+  width: 100%;
+  height: 240px;
+  border: 0;
+}
+.close-btn {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  font-size: 22px;
+  cursor: pointer;
 }
 </style>
 </head>
@@ -105,63 +132,95 @@ img {
   <div class="profile"></div>
 </div>
 
-<!-- 🔹 SECTION 1 : พรีเมียร์ลีก -->
+<!-- พรีเมียร์ลีก -->
 <div class="section">
   <div class="section-title">
     <span>พรีเมียร์ลีก</span>
-    <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span>
+    <span style="color:#aaa;font-size:14px;">คลิกดู ▶</span>
   </div>
 
   <div class="horizontal-list">
-    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div></a><div class="card-footer"><span>เชลซี vs บอร์นมัธ 02:30</span><span>▶</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div></a><div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน 02:30</span><span>▶</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img2.pic.in.th/ben.png"></div></a><div class="card-footer"><span>เบิร์นลีย์ vs นิวคาสเซิ่ล 02:30</span><span>▶</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/for71218c82954a3b62.png"></div></a><div class="card-footer"><span>ฟอเรสต์ vs เอฟเวอร์ตัน 02:30</span><span>▶</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/ar7b5f5b52cd78d236.png"></div></a><div class="card-footer"><span>อาร์เซน่อล vs แอสตัน วิลล่า 03:15</span><span>▶</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/manf87d36dc5128ea07.png"></div></a><div class="card-footer"><span>แมนยูไนเต็ด vs วูล์ฟแฮมป์ตัน 03:15</span><span>▶</span></div></div>
-    <div class="card"><a href="#"><div class="card-img"><img src="https://via.placeholder.com/300x150?text=7"></div></a><div class="card-footer"><span>คู่เด็ด 7</span><span>▶</span></div></div>
-    <div class="card"><a href="#"><div class="card-img"><img src="https://via.placeholder.com/300x150?text=8"></div></a><div class="card-footer"><span>คู่เด็ด 8</span><span>▶</span></div></div>
+    <div class="card" onclick="openPlayer('https://ballmun.net/ch1')">
+      <div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div>
+      <div class="card-footer"><span>เชลซี vs บอร์นมัธ</span><span>02:30</span></div>
+    </div>
+
+    <div class="card" onclick="openPlayer('https://ballmun.net/ch1')">
+      <div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div>
+      <div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน</span><span>02:30</span></div>
+    </div>
   </div>
 </div>
 
 <!-- Categories -->
 <div class="categories">
-  <a href="program.html" class="active">โปรแกรมบอล</a>
-  <a href="tip.html">ทีเด็ดบอล</a>
-  <a href="score.html">ผลบอลสด</a>
-  <a href="highlight.html">กีฬาอื่นๆ</a>
+  <a href="#" class="active">โปรแกรมบอล</a>
+  <a href="#">ทีเด็ดบอล</a>
+  <a href="#">ผลบอลสด</a>
+  <a href="#">กีฬาอื่นๆ</a>
 </div>
 
-<!-- 🔹 SECTION 2 : โปรแกรมบอลวันนี้ -->
+<!-- โปรแกรมบอลวันนี้ -->
 <div class="section">
   <div class="section-title">
     <span>โปรแกรมบอลวันนี้</span>
-    <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span>
+    <span style="color:#aaa;font-size:14px;">คลิกดู ▶</span>
   </div>
 
   <div class="horizontal-list">
-    <div class="card"><a href="https://ballmun.net/ch4"><div class="card-img"><img src="https://img2.pic.in.th/roms.png"></div></a><div class="card-footer"><span>ทีม A vs B</span><span>20:00</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/anb77fb18905a24b45.png"></div></a><div class="card-footer"><span>ทีม C vs D</span><span>22:00</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/sam.png"></div></a><div class="card-footer"><span>ทีม E vs F</span><span>00:00</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img2.pic.in.th/co.png"></div></a><div class="card-footer"><span>ทีม G vs H</span><span>02:00</span></div></div>
+    <div class="card" onclick="openPlayer('https://ballmun.net/ch2')">
+      <div class="card-img"><img src="https://img2.pic.in.th/co.png"></div>
+      <div class="card-footer"><span>ทีม A vs B</span><span>20:00</span></div>
+    </div>
+
+    <div class="card" onclick="openPlayer('https://ballmun.net/ch3')">
+      <div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/sam.png"></div>
+      <div class="card-footer"><span>ทีม C vs D</span><span>22:00</span></div>
+    </div>
   </div>
 </div>
 
-<!-- 🔹 SECTION 3 : บทความ / วิเคราะห์บอลวันนี้ -->
+<!-- ไฮไลท์ฟุตบอล -->
 <div class="section">
   <div class="section-title">
     <span>ไฮไลท์ฟุตบอล</span>
-    <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span>
+    <span style="color:#aaa;font-size:14px;">คลิกดู ▶</span>
   </div>
 
   <div class="horizontal-list">
-    <div class="card"><a href="#"><div class="card-img"><img src="https://via.placeholder.com/300?text=A"></div></a><div class="card-footer"><span>บทความ 1</span><span>▶</span></div></div>
-    <div class="card"><a href="#"><div class="card-img"><img src="https://via.placeholder.com/300?text=B"></div></a><div class="card-footer"><span>บทความ 2</span><span>▶</span></div></div>
-    <div class="card"><a href="#"><div class="card-img"><img src="https://via.placeholder.com/300?text=C"></div></a><div class="card-footer"><span>บทความ 3</span><span>▶</span></div></div>
-    <div class="card"><a href="#"><div class="card-img"><img src="https://via.placeholder.com/300?text=D"></div></a><div class="card-footer"><span>บทความ 4</span><span>▶</span></div></div>
+    <div class="card" onclick="openPlayer('https://www.youtube.com/embed/VIDEO_ID_1')">
+      <div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+1"></div>
+      <div class="card-footer"><span>คู่เดือดเมื่อคืน</span><span>▶</span></div>
+    </div>
+
+    <div class="card" onclick="openPlayer('https://www.youtube.com/embed/VIDEO_ID_2')">
+      <div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+2"></div>
+      <div class="card-footer"><span>ประตูสวย</span><span>▶</span></div>
+    </div>
   </div>
 </div>
 
 </div>
+
+<!-- PLAYER -->
+<div class="overlay" id="overlay">
+  <div class="player-box">
+    <div class="close-btn" onclick="closePlayer()">✕</div>
+    <iframe id="player" src="" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+function openPlayer(url) {
+  document.getElementById('player').src = url;
+  document.getElementById('overlay').classList.add('active');
+}
+
+function closePlayer() {
+  document.getElementById('player').src = '';
+  document.getElementById('overlay').classList.remove('active');
+}
+</script>
+
 </body>
 </html>
