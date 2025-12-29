@@ -98,17 +98,26 @@ img { width: 100%; height: 100%; object-fit: cover; display: block; }
 </div>
 
 <script>
-// สำหรับพรีเมียร์ลีกและโปรแกรมบอลวันนี้
+// toggle สำหรับพรีเมียร์ลีก / โปรแกรมบอลวันนี้
 function setupLinkColumn(listSelector, playerId){
   const playerBox = document.getElementById(playerId);
   const iframe = playerBox.querySelector('iframe');
+  let activeCard = null;
 
   document.querySelectorAll(listSelector + ' .team-card').forEach(card=>{
     card.addEventListener('click', ()=>{
       const link = card.dataset.link;
-      iframe.src = link;
-      playerBox.style.display = 'block';
-      playerBox.scrollIntoView({behavior:'smooth', block:'start'});
+
+      if(activeCard === card){ // คลิกซ้ำ -> ปิด
+        playerBox.style.display = 'none';
+        iframe.src = link; // reset
+        activeCard = null;
+      } else { // คลิกใหม่ -> แสดง
+        iframe.src = link;
+        playerBox.style.display = 'block';
+        playerBox.scrollIntoView({behavior:'smooth', block:'start'});
+        activeCard = card;
+      }
     });
   });
 }
@@ -116,20 +125,31 @@ function setupLinkColumn(listSelector, playerId){
 setupLinkColumn('.premier-list', 'premierPlayer');
 setupLinkColumn('.today-list', 'todayPlayer');
 
-// ไฮไลท์ฟุตบอล
+// toggle สำหรับไฮไลท์ยูทูป
 const highlightBox = document.getElementById('highlightPlayer');
+let activeHighlight = null;
 document.querySelectorAll('.highlight-card').forEach(card=>{
   card.addEventListener('click', ()=>{
     let url = card.dataset.video;
+
+    if(activeHighlight === card){ // คลิกซ้ำ -> ปิด
+      highlightBox.style.display = 'none';
+      highlightBox.innerHTML = '';
+      activeHighlight = null;
+      return;
+    }
+
     if(url.includes('youtu.be')){
       const id = url.split('/').pop().split('?')[0];
       url = `https://www.youtube.com/embed/${id}`;
     }
+
     highlightBox.innerHTML = `<iframe src="${url}?autoplay=1&mute=1"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen></iframe>`;
     highlightBox.style.display = 'block';
     highlightBox.scrollIntoView({behavior:'smooth', block:'start'});
+    activeHighlight = card;
   });
 });
 </script>
