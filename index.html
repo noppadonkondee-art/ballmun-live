@@ -2,201 +2,166 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
+<title>Ballmun.com</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BALLMUN ดูบอลสด</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: Arial, Helvetica, sans-serif;
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+
+body {
+  margin: 0;
+  background: #1e1e1e;
+  color: #fff;
 }
 
-body{
-    color:#fff;
-    padding-bottom:70px;
-    background:#000; /* พื้นหลังส่วนล่าง */
+a { text-decoration: none; color: inherit; display: block; }
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-/* ===== BACKGROUND TOP (จบที่รูปนักเตะ) ===== */
-.bg-top{
-    background-image:url("https://img5.pic.in.th/file/secure-sv1/bgg9ef2b8bc11c9c5b1.png");
-    background-repeat:no-repeat;
-    background-position:center top;
-    background-size:cover;
+.app { max-width: 420px; margin: auto; }
+
+/* Header */
+.header {
+  background: #e39a2d;
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* HEADER LOGO */
-.header{
-    text-align:center;
-    padding:30px 10px 10px;
+.menu { font-size: 22px; color: #000; }
+.title { font-size: 20px; font-weight: bold; color: #000; }
+.profile { width: 36px; height: 36px; background: #fff; border-radius: 50%; }
+
+/* Section */
+.section { padding: 16px; }
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
 
-.header img{
-    max-width:220px;
-    width:100%;
+/* Horizontal list */
+.horizontal-list {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 6px;
 }
 
-/* LIVE GRID */
-.live-container{
-    width:90%;
-    max-width:420px;
-    margin:0 auto 20px;
+/* Card */
+.card {
+  min-width: 180px;
+  background: #2a2a2a;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
-.live-row{
-    display:flex;
-    gap:10px;
-    margin-bottom:10px;
+.card-img { height: 110px; }
+
+.card-footer {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
 }
 
-/* IMAGE BUTTON */
-.live-btn{
-    flex:1;
-    position:relative;
-    overflow:hidden;
-    border-radius:8px;
+/* Categories (คลิกลิงก์ได้) */
+.categories {
+  display: flex;
+  gap: 10px;
+  padding: 0 16px;
+  margin-bottom: 16px;
 }
 
-.live-btn img{
-    width:100%;
-    display:block;
-    border-radius:8px;
-    transition:.25s ease;
+.categories a {
+  background: #444;
+  padding: 10px 16px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
-/* เอฟเฟกต์ไฟ */
-.live-btn:hover img{
-    transform:scale(1.06);
-    box-shadow:
-        0 0 10px #f5c400,
-        0 0 25px #f5c400,
-        0 0 45px rgba(245,196,0,.9);
-}
-
-.live-btn:active img{
-    transform:scale(0.95);
-    box-shadow:
-        0 0 15px #fff,
-        0 0 35px #f5c400,
-        0 0 60px #f5c400;
-}
-
-/* www.ballmun.com */
-.image-bar{
-    width:90%;
-    max-width:420px;
-    margin:10px auto 0;
-}
-
-.image-bar img{
-    width:100%;
-    display:block;
-    border-radius:8px;
-}
-
-/* รูปนักเตะ (ตัวจบพื้นหลัง) */
-.player-banner{
-    width:90%;
-    max-width:420px;
-    margin:5px auto 0;
-}
-
-.player-banner img{
-    width:100%;
-    display:block;
-}
-
-/* ===== BOTTOM MENU ===== */
-.bottom-menu{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    background:rgba(17,17,17,.95);
-    display:flex;
-    justify-content:space-around;
-    padding:8px 0;
-    border-top:1px solid #333;
-    z-index:999;
-}
-
-.bottom-item{
-    width:20%;
-    text-align:center;
-    font-size:12px;
-    color:#ccc;
-    text-decoration:none;
-}
-
-.bottom-item .icon{
-    font-size:20px;
-    display:block;
-    margin-bottom:2px;
-}
-
-.bottom-item.home{
-    color:#f5c400;
+.categories a.active {
+  background: #e39a2d;
+  color: #000;
 }
 </style>
 </head>
 
 <body>
+<div class="app">
 
-<!-- ===== พื้นหลังบน (จบตรงรูปนักเตะ) ===== -->
-<div class="bg-top">
-
-    <!-- LOGO -->
-    <div class="header">
-        <a href="https://ballmun.net/">
-            <img src="https://img2.pic.in.th/pic/23a04a0f8ca705ff7.png">
-        </a>
-    </div>
-
-    <!-- LIVE BUTTONS -->
-    <div class="live-container">
-
-        <div class="live-row">
-            <a href="https://ballmun.net/ch1" class="live-btn"><img src="https://img5.pic.in.th/file/secure-sv1/-12b4e5913a8065405.png"></a>
-            <a href="https://ballmun.net/ch2" class="live-btn"><img src="https://img2.pic.in.th/pic/Artboard-288fc9bcc587f33da.png"></a>
-            <a href="https://ballmun.net/ch3" class="live-btn"><img src="https://img2.pic.in.th/pic/Artboard-33997a8ce5e0a22e7.png"></a>
-        </div>
-
-        <div class="live-row">
-            <a href="https://ballmun.net/ch4" class="live-btn"><img src="https://img5.pic.in.th/file/secure-sv1/Artboard-65f88e4f8e468be89.png"></a>
-            <a href="https://ballmun.net/ch5" class="live-btn"><img src="https://img2.pic.in.th/pic/Artboard-5558fb82a739638c2.png"></a>
-            <a href="https://ballmun.net/ch6" class="live-btn"><img src="https://img5.pic.in.th/file/secure-sv1/Artboard-4e1144d6ae48bdb3c.png"></a>
-        </div>
-
-        <div class="live-row">
-            <a href="https://ballmun.net/ch7" class="live-btn"><img src="https://img2.pic.in.th/pic/Artboard-9b326bc3431f5b888.png"></a>
-            <a href="https://ballmun.net/ch8" class="live-btn"><img src="https://img5.pic.in.th/file/secure-sv1/Artboard-820190f735d538db9.png"></a>
-            <a href="https://t.me/ballmunchat/1" class="live-btn"><img src="https://img2.pic.in.th/pic/Artboard-75a1500be75d338ff.png"></a>
-        </div>
-
-    </div>
-
-    <!-- www.ballmun.com -->
-    <div class="image-bar">
-        <img src="https://img5.pic.in.th/file/secure-sv1/Untitled-3f7247734d3154067.png">
-    </div>
-
-    <!-- รูปนักเตะ (จบพื้นหลังพอดีตรงนี้) -->
-    <div class="player-banner">
-        <img src="https://img5.pic.in.th/file/secure-sv1/Blue-and-White-Modern-Sports-News-Instagram-Reel-10c44b8abd1349e51a.png">
-    </div>
-
+<!-- Header -->
+<div class="header">
+  <div class="menu">☰</div>
+  <div class="title">Ballmun.com</div>
+  <div class="profile"></div>
 </div>
 
-<!-- ===== BOTTOM MENU ===== -->
-<div class="bottom-menu">
-    <a href="https://t.me/ballmunn" class="bottom-item"><span class="icon">⚽</span>โปรแกรมบอล</a>
-    <a href="https://ballmun.net/news" class="bottom-item"><span class="icon">📰</span>ข่าวฟุตบอล</a>
-    <a href="https://ballmun.net/" class="bottom-item home"><span class="icon">🏠</span>หน้าแรก</a>
-    <a href="https://nai-warp.net/" class="bottom-item"><span class="icon">💋</span>18+</a>
-    <a href="https://wallet.sbobetwc.net/WCMB/" class="bottom-item"><span class="icon">💰</span>เดิมพันกีฬา</a>
+<!-- 🔹 SECTION 1 : พรีเมียร์ลีก -->
+<div class="section">
+  <div class="section-title">
+    <span>พรีเมียร์ลีก</span>
+    <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span>
+  </div>
+
+  <div class="horizontal-list">
+    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div></a><div class="card-footer"><span>เชลซี vs บอร์นมัธ 02:30</span><span>▶</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div></a><div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน 02:30</span><span>▶</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img2.pic.in.th/ben.png"></div></a><div class="card-footer"><span>เบิร์นลีย์ vs นิวคาสเซิ่ล 02:30</span><span>▶</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/for71218c82954a3b62.png"></div></a><div class="card-footer"><span>ฟอเรสต์ vs เอฟเวอร์ตัน 02:30</span><span>▶</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/ar7b5f5b52cd78d236.png"></div></a><div class="card-footer"><span>อาร์เซน่อล vs แอสตัน วิลล่า 03:15</span><span>▶</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/manf87d36dc5128ea07.png"></div></a><div class="card-footer"><span>แมนยูไนเต็ด vs วูล์ฟแฮมป์ตัน 03:15</span><span>▶</span></div></div>
+    <div class="card"><a href="#"><div class="card-img"><img src="https://via.placeholder.com/300x150?text=7"></div></a><div class="card-footer"><span>คู่เด็ด 7</span><span>▶</span></div></div>
+    <div class="card"><a href="#"><div class="card-img"><img src="https://via.placeholder.com/300x150?text=8"></div></a><div class="card-footer"><span>คู่เด็ด 8</span><span>▶</span></div></div>
+  </div>
 </div>
 
+<!-- Categories -->
+<div class="categories">
+  <a href="program.html" class="active">โปรแกรมบอล</a>
+  <a href="tip.html">ทีเด็ดบอล</a>
+  <a href="score.html">ผลบอลสด</a>
+  <a href="highlight.html">กีฬาอื่นๆ</a>
+</div>
+
+<!-- 🔹 SECTION 2 : โปรแกรมบอลวันนี้ -->
+<div class="section">
+  <div class="section-title">
+    <span>โปรแกรมบอลวันนี้</span>
+    <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span>
+  </div>
+
+  <div class="horizontal-list">
+    <div class="card"><a href="https://ballmun.net/ch4"><div class="card-img"><img src="https://img2.pic.in.th/roms.png"></div></a><div class="card-footer"><span>ทีม A vs B</span><span>20:00</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/anb77fb18905a24b45.png"></div></a><div class="card-footer"><span>ทีม C vs D</span><span>22:00</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/sam.png"></div></a><div class="card-footer"><span>ทีม E vs F</span><span>00:00</span></div></div>
+    <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img2.pic.in.th/co.png"></div></a><div class="card-footer"><span>ทีม G vs H</span><span>02:00</span></div></div>
+  </div>
+</div>
+
+<!-- 🔹 SECTION 3 : บทความ / วิเคราะห์บอลวันนี้ -->
+<div class="section">
+  <div class="section-title">
+    <span>ไฮไลท์ฟุตบอล</span>
+    <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span>
+  </div>
+
+  <div class="horizontal-list">
+    <div class="card"><a href="#"><div class="card-img"><img src="https://via.placeholder.com/300?text=A"></div></a><div class="card-footer"><span>บทความ 1</span><span>▶</span></div></div>
+    <div class="card"><a href="#"><div class="card-img"><img src="https://via.placeholder.com/300?text=B"></div></a><div class="card-footer"><span>บทความ 2</span><span>▶</span></div></div>
+    <div class="card"><a href="#"><div class="card-img"><img src="https://via.placeholder.com/300?text=C"></div></a><div class="card-footer"><span>บทความ 3</span><span>▶</span></div></div>
+    <div class="card"><a href="#"><div class="card-img"><img src="https://via.placeholder.com/300?text=D"></div></a><div class="card-footer"><span>บทความ 4</span><span>▶</span></div></div>
+  </div>
+</div>
+
+</div>
 </body>
 </html>
