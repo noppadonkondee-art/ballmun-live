@@ -13,84 +13,32 @@ img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .app { max-width: 420px; margin: auto; }
 
 /* Header */
-.header {
-  background: #e39a2d;
-  padding: 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+.header { background: #e39a2d; padding: 14px; display: flex; justify-content: space-between; align-items: center; }
 .menu { font-size: 22px; color: #000; }
 .title { font-size: 20px; font-weight: bold; color: #000; }
 .profile { width: 36px; height: 36px; background: #fff; border-radius: 50%; }
 
 /* Section */
 .section { padding: 16px; }
-.section-title {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
+.section-title { display: flex; justify-content: space-between; margin-bottom: 12px; }
 
 /* Horizontal list */
-.horizontal-list {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding-bottom: 6px;
-}
+.horizontal-list { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 6px; }
 
 /* Card */
-.card {
-  min-width: 180px;
-  background: #2a2a2a;
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: pointer;
-}
+.card { min-width: 180px; background: #2a2a2a; border-radius: 16px; overflow: hidden; cursor: pointer; }
 .card-img { height: 110px; }
-.card-footer {
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-}
+.card-footer { padding: 10px; display: flex; justify-content: space-between; font-size: 14px; }
 
 /* Categories */
-.categories {
-  display: flex;
-  gap: 10px;
-  padding: 0 16px;
-  margin-bottom: 16px;
-}
-.categories a {
-  background: #444;
-  padding: 10px 16px;
-  border-radius: 20px;
-  color: #fff;
-  font-size: 14px;
-  white-space: nowrap;
-}
-.categories a.active {
-  background: #e39a2d;
-  color: #000;
-}
+.categories { display: flex; gap: 10px; padding: 0 16px; margin-bottom: 16px; }
+.categories a { background: #444; padding: 10px 16px; border-radius: 20px; color: #fff; font-size: 14px; white-space: nowrap; }
+.categories a.active { background: #e39a2d; color: #000; }
 
-/* ไฮไลท์ฟุตบอล */
-.highlight-player{
-  width: 100%;
-  margin-top: 14px;
-  background: #000;
-  border-radius: 16px;
-  overflow: hidden;
-  display: none;
-}
+/* ตัวเล่นวีดีโอ 16:9 */
+.highlight-player { width: 100%; margin-top: 14px; background: #000; border-radius: 16px; overflow: hidden; display: none; position: relative; padding-top: 56.25%; }
 .highlight-player iframe,
-.highlight-player video{
-  width: 100%;
-  height: 230px;
-  border: 0;
-}
+.highlight-player video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 </style>
 </head>
 
@@ -106,93 +54,80 @@ img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 <!-- พรีเมียร์ลีก -->
 <div class="section">
-  <div class="section-title">
-    <span>พรีเมียร์ลีก</span>
-    <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span>
-  </div>
+  <div class="section-title"><span>พรีเมียร์ลีก</span></div>
   <div class="horizontal-list">
-    <div class="card"><a href="https://ballmun.net/ch1"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div></a><div class="card-footer"><span>เชลซี vs บอร์นมัธ</span><span>02:30</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div></a><div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน</span><span>02:30</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch3"><div class="card-img"><img src="https://img2.pic.in.th/ben.png"></div></a><div class="card-footer"><span>เบิร์นลีย์ vs นิวคาสเซิ่ล</span><span>02:30</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch4"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/for71218c82954a3b62.png"></div></a><div class="card-footer"><span>ฟอเรสต์ vs เอฟเวอร์ตัน</span><span>02:30</span></div></div>
+    <div class="card team-card" data-video="https://www.youtube.com/watch?v=Y2nVTYQZvEo"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div><div class="card-footer"><span>เชลซี vs บอร์นมัธ</span><span>02:30</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div><div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน</span><span>02:30</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://img2.pic.in.th/ben.png"></div><div class="card-footer"><span>เบิร์นลีย์ vs นิวคาสเซิ่ล</span><span>02:30</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/for71218c82954a3b62.png"></div><div class="card-footer"><span>ฟอเรสต์ vs เอฟเวอร์ตัน</span><span>02:30</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team5"></div><div class="card-footer"><span>ทีม 5 vs ทีม 6</span><span>04:00</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team7"></div><div class="card-footer"><span>ทีม 7 vs ทีม 8</span><span>05:30</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team9"></div><div class="card-footer"><span>ทีม 9 vs ทีม 10</span><span>07:00</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team11"></div><div class="card-footer"><span>ทีม 11 vs ทีม 12</span><span>08:30</span></div></div>
   </div>
-</div>
-
-<!-- Categories -->
-<div class="categories">
-  <a href="program.html" class="active">โปรแกรมบอล</a>
-  <a href="tip.html">ทีเด็ดบอล</a>
-  <a href="score.html">ผลบอลสด</a>
-  <a href="highlight.html">กีฬาอื่นๆ</a>
+  <div class="highlight-player" id="premierPlayer"></div>
 </div>
 
 <!-- โปรแกรมบอลวันนี้ -->
 <div class="section">
-  <div class="section-title">
-    <span>โปรแกรมบอลวันนี้</span>
-    <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span>
-  </div>
+  <div class="section-title"><span>โปรแกรมบอลวันนี้</span></div>
   <div class="horizontal-list">
-    <div class="card"><a href="https://ballmun.net/ch4"><div class="card-img"><img src="https://img2.pic.in.th/roms.png"></div></a><div class="card-footer"><span>ทีม A vs B</span><span>20:00</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/anb77fb18905a24b45.png"></div></a><div class="card-footer"><span>ทีม C vs D</span><span>22:00</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/sam.png"></div></a><div class="card-footer"><span>ทีม E vs F</span><span>00:00</span></div></div>
-    <div class="card"><a href="https://ballmun.net/ch2"><div class="card-img"><img src="https://img2.pic.in.th/co.png"></div></a><div class="card-footer"><span>ทีม G vs H</span><span>02:00</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://img2.pic.in.th/roms.png"></div><div class="card-footer"><span>ทีม A vs B</span><span>20:00</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/anb77fb18905a24b45.png"></div><div class="card-footer"><span>ทีม C vs D</span><span>22:00</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/sam.png"></div><div class="card-footer"><span>ทีม E vs F</span><span>00:00</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://img2.pic.in.th/co.png"></div><div class="card-footer"><span>ทีม G vs H</span><span>02:00</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team5"></div><div class="card-footer"><span>ทีม I vs J</span><span>04:00</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team6"></div><div class="card-footer"><span>ทีม K vs L</span><span>05:30</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team7"></div><div class="card-footer"><span>ทีม M vs N</span><span>07:00</span></div></div>
+    <div class="card team-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team8"></div><div class="card-footer"><span>ทีม O vs P</span><span>08:30</span></div></div>
   </div>
+  <div class="highlight-player" id="todayPlayer"></div>
 </div>
 
 <!-- ไฮไลท์ฟุตบอล -->
-<div class="section" id="highlightSection">
-  <div class="section-title">
-    <span>ไฮไลท์ฟุตบอล</span>
-    <span style="color:#aaa;font-size:14px;">คลิกดู ▶</span>
-  </div>
+<div class="section">
+  <div class="section-title"><span>ไฮไลท์ฟุตบอล</span></div>
   <div class="horizontal-list">
-    <div class="card highlight-card" data-video="https://youtu.be/Y2nVTYQZvEo?si=Z05zJGt8Vsy9ZCIG">
-      <div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+1"></div>
-      <div class="card-footer"><span>ไฮไลท์คู่ที่ 1</span><span>▶</span></div>
-    </div>
-    <div class="card highlight-card" data-video="https://www.youtube.com/embed/Y2nVTYQZvEo">
-      <div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+2"></div>
-      <div class="card-footer"><span>ไฮไลท์คู่ที่ 2</span><span>▶</span></div>
-    </div>
-    <div class="card highlight-card" data-video="https://yourdomain.com/video.mp4">
-      <div class="card-img"><img src="https://via.placeholder.com/300?text=MP4"></div>
-      <div class="card-footer"><span>ไฮไลท์ MP4</span><span>▶</span></div>
-    </div>
+    <div class="card highlight-card" data-video="https://youtu.be/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+1"></div><div class="card-footer"><span>ไฮไลท์คู่ที่ 1</span><span>▶</span></div></div>
+    <div class="card highlight-card" data-video="https://www.youtube.com/embed/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+2"></div><div class="card-footer"><span>ไฮไลท์คู่ที่ 2</span><span>▶</span></div></div>
   </div>
-
-  <!-- ตัวเล่นวีดีโอ -->
   <div class="highlight-player" id="highlightPlayer"></div>
 </div>
 
 </div>
 
 <script>
-const playerBox = document.getElementById('highlightPlayer');
+function setupVideoSection(cardsSelector, playerId){
+  const playerBox = document.getElementById(playerId);
+  
+  document.querySelectorAll(cardsSelector).forEach(card=>{
+    card.addEventListener('click', ()=>{
+      let url = card.dataset.video;
+      
+      // แปลง youtu.be เป็น embed
+      if(url.includes('youtu.be')){
+        const id = url.split('/').pop().split('?')[0];
+        url = `https://www.youtube.com/embed/${id}`;
+      }
 
-document.querySelectorAll('.highlight-card').forEach(card=>{
-  card.addEventListener('click',()=>{
-    let url = card.dataset.video;
+      if(url.endsWith('.mp4')){
+        playerBox.innerHTML = `<video src="${url}" controls autoplay playsinline style="width:100%; height:100%;"></video>`;
+      } else {
+        playerBox.innerHTML = `<iframe src="${url}?autoplay=1&mute=1" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen style="width:100%; height:100%;"></iframe>`;
+      }
 
-    // แปลง youtu.be เป็น embed
-    if(url.includes('youtu.be')){
-      const id = url.split('/').pop().split('?')[0];
-      url = `https://www.youtube.com/embed/${id}`;
-    }
-
-    if(url.endsWith('.mp4')){
-      playerBox.innerHTML =
-        `<video src="${url}" controls autoplay playsinline style="width:100%; height:230px;"></video>`;
-    } else {
-      playerBox.innerHTML =
-        `<iframe src="${url}?autoplay=1&mute=1"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>`;
-    }
-
-    playerBox.style.display = 'block';
+      playerBox.style.display = 'block';
+      playerBox.scrollIntoView({behavior:'smooth', block:'start'});
+    });
   });
-});
+}
+
+// ตั้งค่าแต่ละคอลัมน์
+setupVideoSection('.section:nth-of-type(2) .team-card', 'premierPlayer');
+setupVideoSection('.section:nth-of-type(3) .team-card', 'todayPlayer');
+setupVideoSection('.highlight-card', 'highlightPlayer');
 </script>
 
 </body>
