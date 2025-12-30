@@ -37,40 +37,21 @@ img{width:100%;height:100%;object-fit:cover;display:block}
 .card-img{height:110px}
 .card-footer{ padding:10px; display:flex; justify-content:space-between; font-size:13px }
 
-/* ===== 📺 ไฮไลท์ฟุตบอล (Original Iframe Style) ===== */
-.highlight-player{
-  width:100%; margin-top:14px; background:#000; border-radius:16px; overflow:hidden; display:none; border: 1px solid #e39a2d;
-}
-.highlight-player iframe, .highlight-player video{ width:100%; height:230px; border:0; display:block; }
+/* ===== 📺 ไฮไลท์ฟุตบอล (Iframe ใต้รายการ) ===== */
+.highlight-player{ width:100%; margin-top:14px; background:#000; border-radius:16px; overflow:hidden; display:none; border: 1px solid #e39a2d; }
+.highlight-player iframe{ width:100%; height:230px; border:0; display:block; }
 
-/* ===== 📺 Pop-up สำหรับดูบอลสด เท่านั้น ===== */
-#video-popup {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); z-index: 20000; display: none;
-    align-items: center; justify-content: center; padding: 20px;
-}
-.video-container {
-    width: 100%; max-width: 800px; background: #000; border-radius: 12px; overflow: hidden;
-    position: relative; border: 1px solid #e39a2d;
-}
-.video-header { background: #e39a2d; color: #000; padding: 10px 15px; display: flex; justify-content: space-between; font-weight: bold; }
+/* ===== 📺 ระบบเปิดบอลหน้าเดิม (Overlay) ===== */
+#live-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; flex-direction: column; }
+.live-header { background: #e39a2d; color: #000; padding: 15px; display: flex; justify-content: space-between; font-weight: bold; }
+#live-frame { width: 100%; flex-grow: 1; border: none; }
 
-/* ===== 💬 Pop-up แชทสด ===== */
-#chat-btn{
-    position:fixed; bottom:20px; right:20px; background:#e39a2d; color:#000;
-    padding:12px 20px; border-radius:50px; font-weight:bold; cursor:pointer;
-    z-index: 10000; box-shadow:0 4px 15px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 8px;
-}
-#chat-window {
-    position:fixed; bottom:80px; right:20px; width:340px; height:450px; max-height: 70vh;
-    background:#111; border-radius:15px; display:none; z-index: 10001;
-    overflow:hidden; flex-direction: column; border: 1px solid #e39a2d; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-}
+/* ===== 💬 Pop-up แชทสด (Z-index สูงกว่า Overlay) ===== */
+#chat-btn{ position:fixed; bottom:20px; right:20px; background:#e39a2d; color:#000; padding:12px 20px; border-radius:50px; font-weight:bold; cursor:pointer; z-index: 10001; box-shadow:0 4px 15px rgba(0,0,0,0.5); }
+#chat-window { position:fixed; bottom:80px; right:20px; width:340px; height:450px; max-height: 70vh; background:#111; border-radius:15px; display:none; z-index: 10002; overflow:hidden; flex-direction: column; border: 1px solid #e39a2d; }
 .chat-header { background:#e39a2d; color:#000; padding:10px 15px; display:flex; justify-content:space-between; font-weight:bold; }
 
-@media(max-width:480px){
-    #chat-window { width: 92%; right: 4%; bottom: 85px; }
-}
+@media(max-width:480px){ #chat-window { width: 92%; right: 4%; bottom: 85px; } }
 </style>
 </head>
 
@@ -91,7 +72,7 @@ img{width:100%;height:100%;object-fit:cover;display:block}
     </div>
 
     <div class="section">
-        <div class="section-title"><span>พรีเมียร์ลีก</span> <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span></div>
+        <div class="section-title"><span>พรีเมียร์ลีก</span> <span style="color:#aaa;font-size:12px;">เลื่อนดู ›</span></div>
         <div class="horizontal-list">
             <div class="card" onclick="openLive('https://ballmun.net/ch1', 'เชลซี vs บอร์นมัธ')"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div><div class="card-footer"><span>เชลซี vs บอร์นมัธ</span><span>02:30</span></div></div>
             <div class="card" onclick="openLive('URL2', 'เวสต์แฮม vs ไบรท์ตัน')"><div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div><div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน</span><span>02:30</span></div></div>
@@ -105,21 +86,21 @@ img{width:100%;height:100%;object-fit:cover;display:block}
     </div>
 
     <div class="section">
-        <div class="section-title"><span>โปรแกรมบอลวันนี้</span> <span style="color:#aaa;font-size:14px;">เลื่อนดู ›</span></div>
+        <div class="section-title"><span>โปรแกรมฟุตบอลวันนี้</span> <span style="color:#aaa;font-size:12px;">เลื่อนดู ›</span></div>
         <div class="horizontal-list">
             <div class="card" onclick="openLive('URL9', 'ทีม A vs B')"><div class="card-img"><img src="https://img2.pic.in.th/roms.png"></div><div class="card-footer"><span>ทีม A vs B</span><span>20:00</span></div></div>
             <div class="card" onclick="openLive('URL10', 'ทีม C vs D')"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/anb77fb18905a24b45.png"></div><div class="card-footer"><span>ทีม C vs D</span><span>22:00</span></div></div>
             <div class="card" onclick="openLive('URL11', 'ทีม E vs F')"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/sam.png"></div><div class="card-footer"><span>ทีม E vs F</span><span>00:00</span></div></div>
             <div class="card" onclick="openLive('URL12', 'ทีม G vs H')"><div class="card-img"><img src="https://img2.pic.in.th/co.png"></div><div class="card-footer"><span>ทีม G vs H</span><span>02:00</span></div></div>
-            <div class="card" onclick="openLive('URL13', 'ทีม I vs J')"><div class="card-img"><img src="https://via.placeholder.com/300?text=I+vs+J"></div><div class="card-footer"><span>ทีม I vs J</span><span>19:00</span></div></div>
-            <div class="card" onclick="openLive('URL14', 'ทีม K vs L')"><div class="card-img"><img src="https://via.placeholder.com/300?text=K+vs+L"></div><div class="card-footer"><span>ทีม K vs L</span><span>21:30</span></div></div>
-            <div class="card" onclick="openLive('URL15', 'ทีม M vs N')"><div class="card-img"><img src="https://via.placeholder.com/300?text=M+vs+N"></div><div class="card-footer"><span>ทีม M vs N</span><span>23:45</span></div></div>
-            <div class="card" onclick="openLive('URL16', 'ทีม O vs P')"><div class="card-img"><img src="https://via.placeholder.com/300?text=O+vs+P"></div><div class="card-footer"><span>ทีม O vs P</span><span>01:15</span></div></div>
+            <div class="card" onclick="openLive('URL13', 'ทีม I vs J')"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team+I+vs+J"></div><div class="card-footer"><span>ทีม I vs J</span><span>19:00</span></div></div>
+            <div class="card" onclick="openLive('URL14', 'ทีม K vs L')"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team+K+vs+L"></div><div class="card-footer"><span>ทีม K vs L</span><span>21:00</span></div></div>
+            <div class="card" onclick="openLive('URL15', 'ทีม M vs N')"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team+M+vs+N"></div><div class="card-footer"><span>ทีม M vs N</span><span>23:00</span></div></div>
+            <div class="card" onclick="openLive('URL16', 'ทีม O vs P')"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team+O+vs+P"></div><div class="card-footer"><span>ทีม O vs P</span><span>01:00</span></div></div>
         </div>
     </div>
 
     <div class="section">
-        <div class="section-title"><span>ไฮไลท์ฟุตบอล</span> <span style="color:#aaa;font-size:14px;">คลิกดู ▶</span></div>
+        <div class="section-title"><span>ไฮไลท์ฟุตบอล</span> <span style="color:#aaa;font-size:12px;">คลิกดู ▶</span></div>
         <div class="horizontal-list">
             <div class="card highlight-card" data-video="https://www.youtube.com/embed/DGrlepMcbC4"><div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+1"></div><div class="card-footer"><span>ไฮไลท์คู่ที่ 1</span><span>▶</span></div></div>
             <div class="card highlight-card" data-video="https://www.youtube.com/embed/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+2"></div><div class="card-footer"><span>ไฮไลท์คู่ที่ 2</span><span>▶</span></div></div>
@@ -134,21 +115,37 @@ img{width:100%;height:100%;object-fit:cover;display:block}
     </div>
 </div>
 
-<div id="video-popup">
-    <div class="video-container">
-        <div class="video-header"><span id="v-title">Live Match</span><span style="cursor:pointer" onclick="closeLive()">ปิด [X]</span></div>
-        <div style="position:relative; padding-top: 56.25%;"><iframe id="video-frame" src="" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe></div>
+<div id="live-overlay">
+    <div class="live-header">
+        <span id="live-title">Live Match</span>
+        <span style="cursor:pointer" onclick="closeLive()">ปิดและกลับหน้าหลัก [X]</span>
     </div>
+    <iframe id="live-frame" src="" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
 </div>
 
 <div id="chat-btn" onclick="toggleChat()">💬 แชทสด</div>
 <div id="chat-window">
     <div class="chat-header"><span>แชทสด Ballmun</span><span style="cursor:pointer" onclick="toggleChat()">✖</span></div>
-    <iframe src="https://t.me/ballmunchat/1?embed=1" width="100%" height="100%" frameborder="0"></iframe>
+    <iframe src="https://t.me/ballmunchat/1?embed=1" width="100%" height="100%" frameborder="0" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
 </div>
 
 <script>
-    /* ระบบไฮไลท์ (Iframe ฝังในหน้าเว็บ) */
+    /* ฟังก์ชันเปิดดูบอลสดในหน้าเดิม */
+    function openLive(url, title) {
+        if (url === '#' || url === '') return;
+        document.getElementById('live-title').innerText = title;
+        document.getElementById('live-frame').src = url;
+        document.getElementById('live-overlay').style.display = 'flex';
+        // เปิดแชทให้อัตโนมัติเมื่อเข้าหน้าดูบอล
+        document.getElementById('chat-window').style.display = 'flex';
+    }
+
+    function closeLive() {
+        document.getElementById('live-overlay').style.display = 'none';
+        document.getElementById('live-frame').src = '';
+    }
+
+    /* ฟังก์ชันเล่นไฮไลท์ (Iframe ใต้รายการ) */
     const playerBox = document.getElementById('highlightPlayer');
     document.querySelectorAll('.highlight-card').forEach(card=>{
       card.addEventListener('click',()=>{
@@ -159,25 +156,10 @@ img{width:100%;height:100%;object-fit:cover;display:block}
       });
     });
 
-    /* ระบบดูบอลสด (Pop-up) */
-    function openLive(url, title) {
-        document.getElementById('v-title').innerText = title;
-        document.getElementById('video-frame').src = url;
-        document.getElementById('video-popup').style.display = 'flex';
-    }
-    function closeLive() {
-        document.getElementById('video-popup').style.display = 'none';
-        document.getElementById('video-frame').src = '';
-    }
-
-    /* ระบบแชท */
+    /* ฟังก์ชันแชท */
     function toggleChat() {
         const chat = document.getElementById('chat-window');
         chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
-    }
-
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('video-popup')) closeLive();
     }
 </script>
 
