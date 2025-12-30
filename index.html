@@ -7,160 +7,212 @@
 
 <style>
 *{box-sizing:border-box;font-family:Arial,sans-serif}
-body{margin:0;background:#1e1e1e;color:#fff;overflow-x:hidden}
+body{margin:0;background:#1e1e1e;color:#fff}
 a{text-decoration:none;color:inherit}
 img{width:100%;height:100%;object-fit:cover;display:block}
-.app{max-width:420px;margin:auto;padding-bottom: 100px;}
 
-/* Header & Menu Sticky */
-.header{ background:#e39a2d; padding:14px; display:flex; justify-content:space-between; align-items:center; position: sticky; top: 0; z-index: 1001; }
-.title{font-size:20px;font-weight:bold;color:#000}
-.profile{width:36px;height:36px;background:#fff;border-radius:50%}
+.app{max-width:420px;margin:auto;padding-bottom:120px}
 
-.categories{ 
-  display:flex; gap:10px; padding:16px; background: #1e1e1e; 
-  overflow-x: auto; position: sticky; top: 58px; z-index: 1000; 
-  scrollbar-width: none; border-bottom: 1px solid #333;
+/* ===== Header ===== */
+.header{
+  background:#e39a2d;
+  padding:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
 }
-.categories::-webkit-scrollbar { display: none; }
-.categories a{ background:#444; padding:10px 20px; border-radius:20px; font-size:14px; white-space:nowrap; flex-shrink: 0; cursor: pointer; }
-.categories a.active{ background:#e39a2d; color:#000; font-weight: bold; }
+.title{font-size:20px;font-weight:bold;color:#000}
+.profile{width:34px;height:34px;background:#fff;border-radius:50%}
 
-/* Content Sections */
+/* ===== Categories ===== */
+.categories{
+  display:flex;
+  gap:10px;
+  padding:14px;
+  overflow-x:auto;
+  background:#1e1e1e;
+  position:sticky;
+  top:58px;
+  z-index:999;
+}
+.categories a{
+  background:#444;
+  padding:8px 18px;
+  border-radius:20px;
+  font-size:14px;
+  white-space:nowrap;
+}
+.categories a.active{background:#e39a2d;color:#000;font-weight:bold}
+
+/* ===== Sections ===== */
 .section{padding:16px}
-.section-title{ display:flex; justify-content:space-between; margin-bottom:12px; font-weight: bold; }
-.horizontal-list{ display:flex; gap:12px; overflow-x:auto; padding-bottom:10px; -webkit-overflow-scrolling: touch; }
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:12px;
+  font-weight:bold;
+}
 
-/* Card Design */
-.card{ min-width:180px; background:#2a2a2a; border-radius:16px; overflow:hidden; flex-shrink: 0; cursor: pointer; transition: 0.2s; border: 1px solid #333; }
-.card:active { transform: scale(0.95); }
+/* ===== Cards ===== */
+.horizontal-list{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+}
+.card{
+  min-width:180px;
+  background:#2a2a2a;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid #333;
+  transition:0.2s;
+}
+.card:active{transform:scale(0.95)}
 .card-img{height:110px}
-.card-footer{ padding:10px; display:flex; justify-content:space-between; font-size:13px }
+.card-footer{
+  padding:10px;
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+}
 
-/* ===== 📺 ไฮไลท์ฟุตบอล (Iframe ใต้รายการ) ===== */
-.highlight-player{ width:100%; margin-top:14px; background:#000; border-radius:16px; overflow:hidden; display:none; border: 1px solid #e39a2d; }
-.highlight-player iframe{ width:100%; height:230px; border:0; display:block; }
+/* ===== Chat Button ===== */
+#chat-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#e39a2d;
+  color:#000;
+  padding:12px 20px;
+  border-radius:50px;
+  font-weight:bold;
+  cursor:pointer;
+  z-index:10000;
+}
 
-/* ===== 📺 ระบบเปิดบอลหน้าเดิม (Overlay) ===== */
-#live-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; flex-direction: column; }
-.live-header { background: #e39a2d; color: #000; padding: 15px; display: flex; justify-content: space-between; font-weight: bold; }
-#live-frame { width: 100%; flex-grow: 1; border: none; }
+/* ===== Chat Popup ===== */
+#chat-window{
+  position:fixed;
+  bottom:80px;
+  right:20px;
+  width:340px;
+  height:450px;
+  background:#111;
+  border-radius:15px;
+  display:none;
+  flex-direction:column;
+  z-index:10001;
+  border:1px solid #e39a2d;
+  overflow:hidden;
+}
+.chat-header{
+  background:#e39a2d;
+  color:#000;
+  padding:10px 14px;
+  display:flex;
+  justify-content:space-between;
+  font-weight:bold;
+}
+.chat-body{flex:1}
+.chat-footer a{
+  display:block;
+  background:#e39a2d;
+  color:#000;
+  text-align:center;
+  padding:10px;
+  font-weight:bold;
+}
 
-/* ===== 💬 Pop-up แชทสด (Z-index สูงกว่า Overlay) ===== */
-#chat-btn{ position:fixed; bottom:20px; right:20px; background:#e39a2d; color:#000; padding:12px 20px; border-radius:50px; font-weight:bold; cursor:pointer; z-index: 10001; box-shadow:0 4px 15px rgba(0,0,0,0.5); }
-#chat-window { position:fixed; bottom:80px; right:20px; width:340px; height:450px; max-height: 70vh; background:#111; border-radius:15px; display:none; z-index: 10002; overflow:hidden; flex-direction: column; border: 1px solid #e39a2d; }
-.chat-header { background:#e39a2d; color:#000; padding:10px 15px; display:flex; justify-content:space-between; font-weight:bold; }
-
-@media(max-width:480px){ #chat-window { width: 92%; right: 4%; bottom: 85px; } }
+@media(max-width:480px){
+  #chat-window{width:92%;right:4%}
+}
 </style>
 </head>
 
 <body>
 
 <div class="app">
-    <div class="header">
-        <div class="menu">☰</div>
-        <div class="title">Ballmun.com</div>
-        <div class="profile"></div>
+
+  <div class="header">
+    <div>☰</div>
+    <div class="title">Ballmun.com</div>
+    <div class="profile"></div>
+  </div>
+
+  <div class="categories">
+    <a class="active">โปรแกรมบอล</a>
+    <a>ทีเด็ดบอล</a>
+    <a>ผลบอลสด</a>
+    <a>กีฬาอื่นๆ</a>
+  </div>
+
+  <!-- พรีเมียร์ลีก -->
+  <div class="section">
+    <div class="section-title">
+      <span>พรีเมียร์ลีก</span>
+      <span style="color:#aaa;font-size:12px">เลื่อนดู ›</span>
     </div>
 
-    <div class="categories">
-        <a class="active">โปรแกรมบอล</a>
-        <a>ทีเด็ดบอล</a>
-        <a>ผลบอลสด</a>
-        <a>กีฬาอื่นๆ</a>
-    </div>
+    <div class="horizontal-list">
 
-    <div class="section">
-        <div class="section-title"><span>พรีเมียร์ลีก</span> <span style="color:#aaa;font-size:12px;">เลื่อนดู ›</span></div>
-        <div class="horizontal-list">
-            <div class="card" onclick="openLive('https://ballmun.net/ch1', 'เชลซี vs บอร์นมัธ')"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div><div class="card-footer"><span>เชลซี vs บอร์นมัธ</span><span>02:30</span></div></div>
-            <div class="card" onclick="openLive('https://ballmun.net/ch2', 'เวสต์แฮม vs ไบรท์ตัน')"><div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div><div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน</span><span>02:30</span></div></div>
-            <div class="card" onclick="openLive('URL3', 'เบิร์นลีย์ vs นิวคาสเซิล')"><div class="card-img"><img src="https://img2.pic.in.th/ben.png"></div><div class="card-footer"><span>เบิร์นลีย์ vs นิวคาสเซิล</span><span>02:30</span></div></div>
-            <div class="card" onclick="openLive('URL4', 'ฟอเรสต์ vs เอฟเวอร์ตัน')"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/for71218c82954a3b62.png"></div><div class="card-footer"><span>ฟอเรสต์ vs เอฟเวอร์ตัน</span><span>02:30</span></div></div>
-            <div class="card" onclick="openLive('URL5', 'ลิเวอร์พูล vs อาร์เซนอล')"><div class="card-img"><img src="https://via.placeholder.com/300?text=LIV+vs+ARS"></div><div class="card-footer"><span>LIV vs ARS</span><span>22:00</span></div></div>
-            <div class="card" onclick="openLive('URL6', 'แมนซิตี้ vs สเปอร์ส')"><div class="card-img"><img src="https://via.placeholder.com/300?text=MCI+vs+TOT"></div><div class="card-footer"><span>MCI vs TOT</span><span>00:30</span></div></div>
-            <div class="card" onclick="openLive('URL7', 'แมนยู vs วิลล่า')"><div class="card-img"><img src="https://via.placeholder.com/300?text=MUN+vs+AVL"></div><div class="card-footer"><span>MUN vs AVL</span><span>03:00</span></div></div>
-            <div class="card" onclick="openLive('URL8', 'ฟูแล่ม vs พาเลซ')"><div class="card-img"><img src="https://via.placeholder.com/300?text=FUL+vs+CRY"></div><div class="card-footer"><span>FUL vs CRY</span><span>21:00</span></div></div>
-        </div>
-    </div>
+      <a class="card" href="https://ballmun.net/ch1" target="_blank">
+        <div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div>
+        <div class="card-footer"><span>เชลซี vs บอร์นมัธ</span><span>02:30</span></div>
+      </a>
 
-    <div class="section">
-        <div class="section-title"><span>โปรแกรมฟุตบอลวันนี้</span> <span style="color:#aaa;font-size:12px;">เลื่อนดู ›</span></div>
-        <div class="horizontal-list">
-            <div class="card" onclick="openLive('URL9', 'ทีม A vs B')"><div class="card-img"><img src="https://img2.pic.in.th/roms.png"></div><div class="card-footer"><span>ทีม A vs B</span><span>20:00</span></div></div>
-            <div class="card" onclick="openLive('URL10', 'ทีม C vs D')"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/anb77fb18905a24b45.png"></div><div class="card-footer"><span>ทีม C vs D</span><span>22:00</span></div></div>
-            <div class="card" onclick="openLive('URL11', 'ทีม E vs F')"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/sam.png"></div><div class="card-footer"><span>ทีม E vs F</span><span>00:00</span></div></div>
-            <div class="card" onclick="openLive('URL12', 'ทีม G vs H')"><div class="card-img"><img src="https://img2.pic.in.th/co.png"></div><div class="card-footer"><span>ทีม G vs H</span><span>02:00</span></div></div>
-            <div class="card" onclick="openLive('URL13', 'ทีม I vs J')"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team+I+vs+J"></div><div class="card-footer"><span>ทีม I vs J</span><span>19:00</span></div></div>
-            <div class="card" onclick="openLive('URL14', 'ทีม K vs L')"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team+K+vs+L"></div><div class="card-footer"><span>ทีม K vs L</span><span>21:00</span></div></div>
-            <div class="card" onclick="openLive('URL15', 'ทีม M vs N')"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team+M+vs+N"></div><div class="card-footer"><span>ทีม M vs N</span><span>23:00</span></div></div>
-            <div class="card" onclick="openLive('URL16', 'ทีม O vs P')"><div class="card-img"><img src="https://via.placeholder.com/300?text=Team+O+vs+P"></div><div class="card-footer"><span>ทีม O vs P</span><span>01:00</span></div></div>
-        </div>
-    </div>
+      <a class="card" href="https://ballmun.net/ch2" target="_blank">
+        <div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div>
+        <div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน</span><span>02:30</span></div>
+      </a>
 
-    <div class="section">
-        <div class="section-title"><span>ไฮไลท์ฟุตบอล</span> <span style="color:#aaa;font-size:12px;">คลิกดู ▶</span></div>
-        <div class="horizontal-list">
-            <div class="card highlight-card" data-video="https://www.youtube.com/embed/DGrlepMcbC4"><div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+1"></div><div class="card-footer"><span>ไฮไลท์คู่ที่ 1</span><span>▶</span></div></div>
-            <div class="card highlight-card" data-video="https://www.youtube.com/embed/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+2"></div><div class="card-footer"><span>ไฮไลท์คู่ที่ 2</span><span>▶</span></div></div>
-            <div class="card highlight-card" data-video="https://www.youtube.com/embed/DGrlepMcbC4"><div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+3"></div><div class="card-footer"><span>ไฮไลท์คู่ที่ 3</span><span>▶</span></div></div>
-            <div class="card highlight-card" data-video="https://www.youtube.com/embed/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+4"></div><div class="card-footer"><span>ไฮไลท์คู่ที่ 4</span><span>▶</span></div></div>
-            <div class="card highlight-card" data-video="https://www.youtube.com/embed/DGrlepMcbC4"><div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+5"></div><div class="card-footer"><span>ไฮไลท์คู่ที่ 5</span><span>▶</span></div></div>
-            <div class="card highlight-card" data-video="https://www.youtube.com/embed/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+6"></div><div class="card-footer"><span>ไฮไลท์คู่ที่ 6</span><span>▶</span></div></div>
-            <div class="card highlight-card" data-video="https://www.youtube.com/embed/DGrlepMcbC4"><div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+7"></div><div class="card-footer"><span>ไฮไลท์คู่ที่ 7</span><span>▶</span></div></div>
-            <div class="card highlight-card" data-video="https://www.youtube.com/embed/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300?text=Highlight+8"></div><div class="card-footer"><span>ไฮไลท์คู่ที่ 8</span><span>▶</span></div></div>
-        </div>
-        <div class="highlight-player" id="highlightPlayer"></div>
+      <a class="card" href="https://ballmun.net/ch3" target="_blank">
+        <div class="card-img"><img src="https://img2.pic.in.th/ben.png"></div>
+        <div class="card-footer"><span>เบิร์นลีย์ vs นิวคาสเซิล</span><span>02:30</span></div>
+      </a>
+
+      <a class="card" href="https://ballmun.net/ch4" target="_blank">
+        <div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/for71218c82954a3b62.png"></div>
+        <div class="card-footer"><span>ฟอเรสต์ vs เอฟเวอร์ตัน</span><span>02:30</span></div>
+      </a>
+
     </div>
+  </div>
+
 </div>
 
-<div id="live-overlay">
-    <div class="live-header">
-        <span id="live-title">Live Match</span>
-        <span style="cursor:pointer" onclick="closeLive()">ปิดและกลับหน้าหลัก [X]</span>
-    </div>
-    <iframe id="live-frame" src="" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
-</div>
-
+<!-- Chat Button -->
 <div id="chat-btn" onclick="toggleChat()">💬 แชทสด</div>
+
+<!-- Chat Popup -->
 <div id="chat-window">
-    <div class="chat-header"><span>แชทสด Ballmun</span><span style="cursor:pointer" onclick="toggleChat()">✖</span></div>
-    <iframe src="https://t.me/ballmunchat/1?embed=1" width="100%" height="100%" frameborder="0" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+  <div class="chat-header">
+    <span>แชทสด Ballmun</span>
+    <span style="cursor:pointer" onclick="toggleChat()">✖</span>
+  </div>
+
+  <div class="chat-body">
+    <iframe
+      src="https://t.me/s/ballmunchat"
+      style="width:100%;height:100%;border:0"
+      sandbox="allow-same-origin allow-scripts">
+    </iframe>
+  </div>
+
+  <div class="chat-footer">
+    <a href="https://t.me/ballmunchat" target="_blank">
+      👉 ไปพิมพ์แชทใน Telegram
+    </a>
+  </div>
 </div>
 
 <script>
-    /* ฟังก์ชันเปิดดูบอลสดในหน้าเดิม */
-    function openLive(url, title) {
-        if (url === '#' || url === '') return;
-        document.getElementById('live-title').innerText = title;
-        document.getElementById('live-frame').src = url;
-        document.getElementById('live-overlay').style.display = 'flex';
-        // เปิดแชทให้อัตโนมัติเมื่อเข้าหน้าดูบอล
-        document.getElementById('chat-window').style.display = 'flex';
-    }
-
-    function closeLive() {
-        document.getElementById('live-overlay').style.display = 'none';
-        document.getElementById('live-frame').src = '';
-    }
-
-    /* ฟังก์ชันเล่นไฮไลท์ (Iframe ใต้รายการ) */
-    const playerBox = document.getElementById('highlightPlayer');
-    document.querySelectorAll('.highlight-card').forEach(card=>{
-      card.addEventListener('click',()=>{
-        const url = card.dataset.video;
-        playerBox.style.display = 'block';
-        playerBox.innerHTML = `<iframe src="${url}?autoplay=1&mute=1" allowfullscreen></iframe>`;
-        playerBox.scrollIntoView({behavior:'smooth', block: 'center'});
-      });
-    });
-
-    /* ฟังก์ชันแชท */
-    function toggleChat() {
-        const chat = document.getElementById('chat-window');
-        chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
-    }
+function toggleChat(){
+  const chat=document.getElementById('chat-window');
+  chat.style.display = (chat.style.display==='flex') ? 'none' : 'flex';
+}
 </script>
 
 </body>
