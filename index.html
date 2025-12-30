@@ -7,12 +7,10 @@
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <style>
-/* CSS Reset & Variable */
 :root {
     --primary: #e39a2d;
     --dark-bg: #121212;
     --card-bg: #1e1e1e;
-    --glass: rgba(255, 255, 255, 0.05);
 }
 
 *{box-sizing:border-box;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
@@ -22,7 +20,6 @@ img{width:100%;height:100%;object-fit:cover;display:block}
 
 .app{max-width:420px;margin:auto;padding-bottom: 100px; background: linear-gradient(180deg, #121212 0%, #1a1a1a 100%);}
 
-/* Header & Menu with Glassmorphism */
 .header{ 
     background: rgba(227, 154, 45, 0.95); 
     backdrop-filter: blur(10px);
@@ -47,7 +44,6 @@ img{width:100%;height:100%;object-fit:cover;display:block}
 }
 .categories a.active{ background: var(--primary); color:#000; font-weight: bold; border-color: var(--primary); box-shadow: 0 0 15px rgba(227, 154, 45, 0.4);}
 
-/* Content Sections */
 .section{padding:20px 16px}
 .section-title{ 
     display:flex; justify-content:space-between; align-items: center;
@@ -56,70 +52,49 @@ img{width:100%;height:100%;object-fit:cover;display:block}
 }
 .horizontal-list{ display:flex; gap:15px; overflow-x:auto; padding-bottom:15px; scroll-snap-type: x mandatory; }
 
-/* Premium Card Design */
 .card{ 
     min-width:190px; background: var(--card-bg); border-radius:18px; 
     overflow:hidden; flex-shrink: 0; cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
     border: 1px solid #333; scroll-snap-align: start;
     position: relative;
 }
-.card:hover { transform: translateY(-5px) scale(1.02); border-color: var(--primary); box-shadow: 0 10px 25px rgba(0,0,0,0.6); }
+.card:hover { transform: translateY(-5px) scale(1.02); border-color: var(--primary); }
 .card-img{height:115px; position: relative; overflow: hidden;}
 .card-img::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
 
-.card-footer{ padding:12px; display:flex; justify-content:space-between; font-size:13px; align-items: center; background: #1e1e1e; }
-.card-footer span:first-child { font-weight: 600; color: #eee; }
+.card-footer{ padding:12px; display:flex; justify-content:space-between; font-size:12px; align-items: center; background: #1e1e1e; }
+.card-footer span:first-child { font-weight: 600; color: #eee; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px; }
 
-/* Live Pulse Effect */
-.live-dot {
-    width: 8px; height: 8px; background: #ff4444; border-radius: 50%;
-    display: inline-block; margin-right: 5px;
-    box-shadow: 0 0 0 rgba(255, 68, 68, 0.4);
-    animation: pulse 1.5s infinite;
-}
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(255, 68, 68, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0); }
+.status-container { display: flex; align-items: center; gap: 4px; }
+.live-dot { width: 8px; height: 8px; background: #ff4444; border-radius: 50%; display: none; }
+.live-text { color: #888; font-weight: bold; }
+
+@keyframes blinker {
+    0% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7); }
+    70% { opacity: 0.5; transform: scale(1.2); box-shadow: 0 0 0 8px rgba(255, 68, 68, 0); }
+    100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 68, 68, 0); }
 }
 
-/* ===== 📺 ระบบเปิดบอล (Live Overlay) ===== */
 #live-overlay { 
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
     background: #000; z-index: 9999; display: none; flex-direction: column; 
-    animation: slideUp 0.4s ease-out;
+    animation: slideUp 0.3s ease-out;
 }
 @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
-.live-header { background: #1a1a1a; border-bottom: 2px solid var(--primary); color: var(--primary); padding: 15px; display: flex; justify-content: space-between; font-weight: bold; }
-#video-container { width: 100%; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,1); }
+.live-header { background: #1a1a1a; border-bottom: 2px solid var(--primary); color: var(--primary); padding: 12px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+.header-btns { display: flex; gap: 8px; }
+.btn-ui { cursor:pointer; background: #333; color: #fff; padding: 6px 12px; border-radius: 5px; font-size: 12px; border: none; }
+
+#video-container { width: 100%; background: #000; }
 #m3u8-video, #live-frame { width: 100%; display: none; aspect-ratio: 16/9; background: #000; border:none; }
-#chat-area { flex-grow: 1; width: 100%; background: #fff; border-top: 2px solid var(--primary); }
+#chat-area { flex-grow: 1; width: 100%; background: #fff; }
 
-/* ===== 💬 ระบบแชท Pop-up (Glow Effect) ===== */
-#chat-popup { 
-    position: fixed; bottom: 90px; right: 20px; width: 350px; height: 500px; 
-    background: #fff; border-radius: 20px; 
-    display: none; z-index: 10002; overflow: hidden; flex-direction: column; 
-    box-shadow: 0 15px 50px rgba(0,0,0,0.8);
-    border: 1px solid var(--primary);
-}
-.chat-pop-header { background: var(--primary); color: #000; padding: 15px; display: flex; justify-content: space-between; font-weight: bold; }
+#chat-btn { position: fixed; bottom: 25px; right: 20px; background: linear-gradient(135deg, #e39a2d, #ffb84d); color: #000; padding: 14px 25px; border-radius: 50px; font-weight: 800; cursor: pointer; z-index: 10001; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+#chat-popup { position: fixed; bottom: 90px; right: 20px; width: 350px; height: 500px; background: #fff; border-radius: 20px; display: none; z-index: 10002; overflow: hidden; flex-direction: column; border: 1px solid var(--primary); }
 
-#chat-btn { 
-    position: fixed; bottom: 25px; right: 20px; 
-    background: linear-gradient(135deg, #e39a2d, #ffb84d); color: #000; 
-    padding: 14px 28px; border-radius: 50px; font-weight: 800; cursor: pointer; 
-    z-index: 10001; box-shadow: 0 5px 20px rgba(227, 154, 45, 0.5);
-    transition: 0.3s; text-transform: uppercase; font-size: 14px;
-}
-#chat-btn:hover { transform: scale(1.05); box-shadow: 0 5px 30px rgba(227, 154, 45, 0.8); }
-
-/* ===== 📺 ไฮไลท์ฟุตบอล ===== */
-.highlight-player{ width:100%; margin-top:14px; background:#000; border-radius:16px; overflow:hidden; display:none; border: 2px solid var(--primary); box-shadow: 0 0 20px rgba(227, 154, 45, 0.2); }
+.highlight-player{ width:100%; margin-top:14px; background:#000; border-radius:16px; overflow:hidden; display:none; border: 2px solid var(--primary); }
 .highlight-player iframe{ width:100%; height:230px; border:0; display:block; }
-
-@media(max-width:480px){ #chat-popup { width: 94%; right: 3%; height: 65vh; } }
 </style>
 </head>
 
@@ -127,7 +102,7 @@ img{width:100%;height:100%;object-fit:cover;display:block}
 
 <div class="app">
     <div class="header">
-        <div class="menu" style="font-size: 24px; cursor: pointer;">☰</div>
+        <div class="menu" style="font-size: 24px;">☰</div>
         <div class="title">Ballmun.com</div>
         <div class="profile"></div>
     </div>
@@ -140,47 +115,92 @@ img{width:100%;height:100%;object-fit:cover;display:block}
     </div>
 
     <div class="section">
-        <div class="section-title"><span>พรีเมียร์ลีก</span> <span style="color:var(--primary); font-size:12px; font-weight:normal;">สดทุกคู่ ›</span></div>
+        <div class="section-title"><span>พรีเมียร์ลีก</span> <span style="color:var(--primary); font-size:12px;">สดทุกคู่ ›</span></div>
         <div class="horizontal-list">
             <div class="card" onclick="openLive('https://cdnsv1.cdncloudbot.com/ballmun/sd1/playlist.m3u8', 'เชลซี vs บอร์นมัธ')">
                 <div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div>
-                <div class="card-footer"><span>เชลซี vs บอร์นมัธ</span><span><span class="live-dot"></span><b style="color:#ff4444">LIVE</b></span></div>
+                <div class="card-footer"><span>เชลซี vs บอร์นมัธ</span><div class="status-container" data-start="02:30" data-end="05:00"><span class="live-dot"></span><span class="live-text">02:30</span></div></div>
             </div>
             <div class="card" onclick="openLive('https://cdnsv1.cdncloudbot.com/ballmun/sd2/playlist.m3u8', 'เวสต์แฮม vs ไบรท์ตัน')">
                 <div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div>
-                <div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน</span><span><span class="live-dot"></span><b style="color:#ff4444">LIVE</b></span></div>
+                <div class="card-footer"><span>เวสต์แฮม vs ไบรท์ตัน</span><div class="status-container" data-start="02:30" data-end="05:00"><span class="live-dot"></span><span class="live-text">02:30</span></div></div>
             </div>
             <div class="card" onclick="openLive('https://cdnsv1.cdncloudbot.com/ballmun/sd3/playlist.m3u8', 'เบิร์นลีย์ vs นิวคาสเซิล')">
                 <div class="card-img"><img src="https://img2.pic.in.th/ben.png"></div>
-                <div class="card-footer"><span>เบิร์นลีย์ vs นิวคาสเซิล</span><span>02:30</span></div>
+                <div class="card-footer"><span>เบิร์นลีย์ vs นิวคาสเซิล</span><div class="status-container" data-start="02:30" data-end="05:00"><span class="live-dot"></span><span class="live-text">02:30</span></div></div>
             </div>
-            <div class="card" onclick="openLive('URL4', 'ลิเวอร์พูล vs ฟูแล่ม')"><div class="card-img"><img src="https://via.placeholder.com/190x115/1e1e1e/888?text=LIVERPOOL"></div><div class="card-footer"><span>ลิเวอร์พูล vs ฟูแล่ม</span><span>02:30</span></div></div>
-            <div class="card" onclick="openLive('URL5', 'แมนฯ ซิตี้ vs เอฟเวอร์ตัน')"><div class="card-img"><img src="https://via.placeholder.com/190x115/1e1e1e/888?text=MAN+CITY"></div><div class="card-footer"><span>แมนฯ ซิตี้ vs เอฟเวอร์ตัน</span><span>02:30</span></div></div>
-            <div class="card" onclick="openLive('URL6', 'อาร์เซน่อล vs สเปอร์ส')"><div class="card-img"><img src="https://via.placeholder.com/190x115/1e1e1e/888?text=ARSENAL"></div><div class="card-footer"><span>อาร์เซน่อล vs สเปอร์ส</span><span>02:30</span></div></div>
-            <div class="card" onclick="openLive('URL7', 'แมนยู vs วิลล่า')"><div class="card-img"><img src="https://via.placeholder.com/190x115/1e1e1e/888?text=MAN+UTD"></div><div class="card-footer"><span>แมนยู vs วิลล่า</span><span>02:30</span></div></div>
-            <div class="card" onclick="openLive('URL8', 'วูล์ฟ vs พาเลซ')"><div class="card-img"><img src="https://via.placeholder.com/190x115/1e1e1e/888?text=WOLVES"></div><div class="card-footer"><span>วูล์ฟ vs พาเลซ</span><span>02:30</span></div></div>
+            <div class="card" onclick="openLive('URL4', 'ลิเวอร์พูล vs ฟูแล่ม')">
+                <div class="card-img"><img src="https://img2.pic.in.th/roms.png"></div>
+                <div class="card-footer"><span>ลิเวอร์พูล vs ฟูแล่ม</span><div class="status-container" data-start="12:00" data-end="15:00"><span class="live-dot"></span><span class="live-text">12:00</span></div></div>
+            </div>
+            <div class="card" onclick="openLive('URL5', 'แมนซิตี้ vs วูล์ฟส์')">
+                <div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div>
+                <div class="card-footer"><span>แมนซิตี้ vs วูล์ฟส์</span><div class="status-container" data-start="21:00" data-end="23:00"><span class="live-dot"></span><span class="live-text">21:00</span></div></div>
+            </div>
+            <div class="card" onclick="openLive('URL6', 'อาร์เซน่อล vs เอฟเวอร์ตัน')">
+                <div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/anb77fb18905a24b45.png"></div>
+                <div class="card-footer"><span>อาร์เซน่อล vs เอฟเวอร์ตัน</span><div class="status-container" data-start="21:00" data-end="23:00"><span class="live-dot"></span><span class="live-text">21:00</span></div></div>
+            </div>
+            <div class="card" onclick="openLive('URL7', 'แมนยู vs พาเลซ')">
+                <div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div>
+                <div class="card-footer"><span>แมนยู vs พาเลซ</span><div class="status-container" data-start="23:30" data-end="01:30"><span class="live-dot"></span><span class="live-text">23:30</span></div></div>
+            </div>
+            <div class="card" onclick="openLive('URL8', 'สเปอร์ส vs วิลล่า')">
+                <div class="card-img"><img src="https://img2.pic.in.th/ben.png"></div>
+                <div class="card-footer"><span>สเปอร์ส vs วิลล่า</span><div class="status-container" data-start="23:30" data-end="01:30"><span class="live-dot"></span><span class="live-text">23:30</span></div></div>
+            </div>
         </div>
     </div>
 
     <div class="section">
-        <div class="section-title"><span>โปรแกรมฟุตบอลวันนี้</span> <span style="color:#aaa;font-size:12px; font-weight:normal;">ทั้งหมด ›</span></div>
+        <div class="section-title"><span>โปรแกรมฟุตบอลวันนี้</span></div>
         <div class="horizontal-list">
-            <div class="card" onclick="openLive('URL9', 'ทีม A vs B')"><div class="card-img"><img src="https://img2.pic.in.th/roms.png"></div><div class="card-footer"><span>ทีม A vs B</span><span>20:00</span></div></div>
-            <div class="card" onclick="openLive('URL10', 'ทีม C vs D')"><div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/anb77fb18905a24b45.png"></div><div class="card-footer"><span>ทีม C vs D</span><span>22:00</span></div></div>
-            <div class="card" onclick="openLive('URL11', 'คู่ที่ 3')"><div class="card-img"><img src="https://via.placeholder.com/190x115/1e1e1e/888?text=MATCH+3"></div><div class="card-footer"><span>ทีม E vs F</span><span>22:00</span></div></div>
-            <div class="card" onclick="openLive('URL12', 'คู่ที่ 4')"><div class="card-img"><img src="https://via.placeholder.com/190x115/1e1e1e/888?text=MATCH+4"></div><div class="card-footer"><span>ทีม G vs H</span><span>23:00</span></div></div>
-            <div class="card" onclick="openLive('URL13', 'คู่ที่ 5')"><div class="card-img"><img src="https://via.placeholder.com/190x115/1e1e1e/888?text=MATCH+5"></div><div class="card-footer"><span>ทีม I vs J</span><span>23:00</span></div></div>
-            <div class="card" onclick="openLive('URL14', 'คู่ที่ 6')"><div class="card-img"><img src="https://via.placeholder.com/190x115/1e1e1e/888?text=MATCH+6"></div><div class="card-footer"><span>ทีม K vs L</span><span>00:00</span></div></div>
-            <div class="card" onclick="openLive('URL15', 'คู่ที่ 7')"><div class="card-img"><img src="https://via.placeholder.com/190x115/1e1e1e/888?text=MATCH+7"></div><div class="card-footer"><span>ทีม M vs N</span><span>01:00</span></div></div>
-            <div class="card" onclick="openLive('URL16', 'คู่ที่ 8')"><div class="card-img"><img src="https://via.placeholder.com/190x115/1e1e1e/888?text=MATCH+8"></div><div class="card-footer"><span>ทีม O vs P</span><span>02:00</span></div></div>
+            <div class="card" onclick="openLive('URL9', 'เรอัล มาดริด vs บาร์ซ่า')">
+                <div class="card-img"><img src="https://img2.pic.in.th/roms.png"></div>
+                <div class="card-footer"><span>เรอัล มาดริด vs บาร์ซ่า</span><div class="status-container" data-start="02:00" data-end="04:00"><span class="live-dot"></span><span class="live-text">02:00</span></div></div>
+            </div>
+            <div class="card" onclick="openLive('URL10', 'บาเยิร์น vs ดอร์ทมุนด์')">
+                <div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/anb77fb18905a24b45.png"></div>
+                <div class="card-footer"><span>บาเยิร์น vs ดอร์ทมุนด์</span><div class="status-container" data-start="22:30" data-end="00:30"><span class="live-dot"></span><span class="live-text">22:30</span></div></div>
+            </div>
+            <div class="card" onclick="openLive('URL11', 'มิลาน vs อินเตอร์')">
+                <div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div>
+                <div class="card-footer"><span>มิลาน vs อินเตอร์</span><div class="status-container" data-start="01:45" data-end="03:45"><span class="live-dot"></span><span class="live-text">01:45</span></div></div>
+            </div>
+            <div class="card" onclick="openLive('URL12', 'เปแอสเช vs ลียง')">
+                <div class="card-img"><img src="https://img2.pic.in.th/ben.png"></div>
+                <div class="card-footer"><span>เปแอสเช vs ลียง</span><div class="status-container" data-start="01:45" data-end="03:45"><span class="live-dot"></span><span class="live-text">01:45</span></div></div>
+            </div>
+            <div class="card" onclick="openLive('URL13', 'เลเวอร์คูเซ่น vs ไลป์ซิก')">
+                <div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/che2b1aedb4e931bab4.png"></div>
+                <div class="card-footer"><span>เลเวอร์ vs ไลป์ซิก</span><div class="status-container" data-start="20:30" data-end="22:30"><span class="live-dot"></span><span class="live-text">20:30</span></div></div>
+            </div>
+            <div class="card" onclick="openLive('URL14', 'ยูเวนตุส vs โรม่า')">
+                <div class="card-img"><img src="https://img2.pic.in.th/roms.png"></div>
+                <div class="card-footer"><span>ยูเวนตุส vs โรม่า</span><div class="status-container" data-start="00:00" data-end="02:00"><span class="live-dot"></span><span class="live-text">00:00</span></div></div>
+            </div>
+            <div class="card" onclick="openLive('URL15', 'แอต มาดริด vs เซบีย่า')">
+                <div class="card-img"><img src="https://img5.pic.in.th/file/secure-sv1/anb77fb18905a24b45.png"></div>
+                <div class="card-footer"><span>แอต มาดริด vs เซบีย่า</span><div class="status-container" data-start="21:15" data-end="23:15"><span class="live-dot"></span><span class="live-text">21:15</span></div></div>
+            </div>
+            <div class="card" onclick="openLive('URL16', 'เบนฟิก้า vs ปอร์โต้')">
+                <div class="card-img"><img src="https://img2.pic.in.th/wes.png"></div>
+                <div class="card-footer"><span>เบนฟิก้า vs ปอร์โต้</span><div class="status-container" data-start="03:00" data-end="05:00"><span class="live-dot"></span><span class="live-text">03:00</span></div></div>
+            </div>
         </div>
     </div>
 
     <div class="section">
         <div class="section-title"><span>ไฮไลท์ฟุตบอล</span></div>
         <div class="horizontal-list">
-            <div class="card highlight-card" data-video="https://www.youtube.com/embed/DGrlepMcbC4"><div class="card-img"><img src="https://via.placeholder.com/300x160/1e1e1e/e39a2d?text=HIGHLIGHT+1"></div><div class="card-footer"><span>ไฮไลท์คู่ที่ 1</span><span style="color:var(--primary)">▶</span></div></div>
-            <div class="card highlight-card" data-video="https://www.youtube.com/embed/Y2nVTYQZvEo"><div class="card-img"><img src="https://via.placeholder.com/300x160/1e1e1e/e39a2d?text=HIGHLIGHT+2"></div><div class="card-footer"><span>ไฮไลท์คู่ที่ 2</span><span style="color:var(--primary)">▶</span></div></div>
+            <div class="card highlight-card" data-video="https://www.youtube.com/embed/DGrlepMcbC4">
+                <div class="card-img"><img src="https://via.placeholder.com/300x160/1e1e1e/e39a2d?text=HIGHLIGHT+1"></div>
+                <div class="card-footer"><span>ไฮไลท์คู่ที่ 1</span><span style="color:var(--primary)">▶</span></div>
+            </div>
+            <div class="card highlight-card" data-video="https://www.youtube.com/embed/Y2nVTYQZvEo">
+                <div class="card-img"><img src="https://via.placeholder.com/300x160/1e1e1e/e39a2d?text=HIGHLIGHT+2"></div>
+                <div class="card-footer"><span>ไฮไลท์คู่ที่ 2</span><span style="color:var(--primary)">▶</span></div>
+            </div>
         </div>
         <div class="highlight-player" id="highlightPlayer"></div>
     </div>
@@ -188,14 +208,19 @@ img{width:100%;height:100%;object-fit:cover;display:block}
 
 <div id="chat-btn" onclick="toggleChatPopup()">💬 แชทสด (Live)</div>
 <div id="chat-popup">
-    <div class="chat-pop-header"><span>Ballmun Live Community</span> <span onclick="toggleChatPopup()" style="cursor:pointer">✖</span></div>
+    <div class="chat-pop-header" style="background:var(--primary); padding:10px; display:flex; justify-content:space-between; color:#000; font-weight:bold;">
+        <span>Community</span> <span onclick="toggleChatPopup()" style="cursor:pointer">✖</span>
+    </div>
     <iframe src="https://organizations.minnit.chat/963759819449616/c/Main?embed&&nickname=" width="100%" height="100%" frameborder="0"></iframe>
 </div>
 
 <div id="live-overlay">
     <div class="live-header">
         <span id="live-title">LIVE MATCH</span>
-        <span style="cursor:pointer; background: #333; padding: 2px 10px; border-radius: 5px;" onclick="closeLive()">ปิด X</span>
+        <div class="header-btns">
+            <button class="btn-ui" onclick="toggleFullscreen()">ขยายหน้าจอ ⛶</button>
+            <button class="btn-ui" onclick="closeLive()" style="background:#ff4444;">ปิด X</button>
+        </div>
     </div>
     <div id="video-container">
         <video id="m3u8-video" controls autoplay playsinline></video>
@@ -207,54 +232,73 @@ img{width:100%;height:100%;object-fit:cover;display:block}
 </div>
 
 <script>
-    let hls = null;
+    /* 1. ระบบ LIVE Blink */
+    function updateLiveBlink() {
+        const now = new Date();
+        const currentTime = now.getHours() * 60 + now.getMinutes();
+        document.querySelectorAll('.status-container').forEach(container => {
+            const startStr = container.getAttribute('data-start');
+            const endStr = container.getAttribute('data-end');
+            if (startStr && endStr) {
+                const [startH, startM] = startStr.split(':').map(Number);
+                const [endH, endM] = endStr.split(':').map(Number);
+                const startTime = startH * 60 + startM;
+                const endTime = endH * 60 + endM;
+                const dot = container.querySelector('.live-dot');
+                const text = container.querySelector('.live-text');
+                if (currentTime >= startTime && currentTime <= endTime) {
+                    dot.style.display = 'inline-block';
+                    dot.style.animation = 'blinker 1.5s infinite';
+                    text.style.color = '#ff4444'; text.innerText = 'LIVE';
+                } else {
+                    dot.style.display = 'none'; dot.style.animation = 'none';
+                    text.style.color = '#888'; text.innerText = startStr;
+                }
+            }
+        });
+    }
+    updateLiveBlink(); setInterval(updateLiveBlink, 60000);
 
-    function toggleChatPopup() {
-        const pop = document.getElementById('chat-popup');
-        pop.style.display = (pop.style.display === 'flex') ? 'none' : 'flex';
+    /* 2. ระบบ Fullscreen & Video */
+    let hls = null;
+    function toggleFullscreen() {
+        const v = document.getElementById('m3u8-video'), f = document.getElementById('live-frame');
+        let target = (v.style.display === 'block') ? v : f;
+        if (target.requestFullscreen) target.requestFullscreen();
+        else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+        else if (target.msRequestFullscreen) target.msRequestFullscreen();
     }
 
     function openLive(url, title) {
-        if (!url || url === '#' || url.startsWith('URL')) return;
+        if (!url || url.startsWith('URL')) return;
         document.getElementById('live-title').innerText = title.toUpperCase();
         document.getElementById('live-overlay').style.display = 'flex';
-        const videoTag = document.getElementById('m3u8-video');
-        const iframeTag = document.getElementById('live-frame');
-
-        if (url.includes('.m3u8') || url.includes('.m3u')) {
-            iframeTag.style.display = 'none';
-            videoTag.style.display = 'block';
+        const v = document.getElementById('m3u8-video'), f = document.getElementById('live-frame');
+        if (url.includes('.m3u8')) {
+            f.style.display = 'none'; v.style.display = 'block';
             if (Hls.isSupported()) {
-                if(hls) hls.destroy();
-                hls = new Hls(); hls.loadSource(url); hls.attachMedia(videoTag);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => videoTag.play());
-            } else if (videoTag.canPlayType('application/vnd.apple.mpegurl')) {
-                videoTag.src = url;
-            }
-        } else {
-            videoTag.style.display = 'none';
-            iframeTag.style.display = 'block';
-            iframeTag.src = url;
-        }
+                if(hls) hls.destroy(); hls = new Hls(); hls.loadSource(url); hls.attachMedia(v);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => v.play());
+            } else if (v.canPlayType('application/vnd.apple.mpegurl')) { v.src = url; }
+        } else { v.style.display = 'none'; f.style.display = 'block'; f.src = url; }
     }
 
     function closeLive() {
         document.getElementById('live-overlay').style.display = 'none';
         document.getElementById('live-frame').src = '';
-        const videoTag = document.getElementById('m3u8-video');
-        videoTag.pause(); videoTag.src = "";
-        if(hls) hls.destroy();
+        const v = document.getElementById('m3u8-video'); v.pause(); v.src = ""; if(hls) hls.destroy();
     }
 
-    /* สคริปต์ไฮไลท์ */
-    const playerBox = document.getElementById('highlightPlayer');
-    document.querySelectorAll('.highlight-card').forEach(card=>{
-      card.addEventListener('click',()=>{
-        const url = card.dataset.video;
-        playerBox.style.display = 'block';
-        playerBox.innerHTML = `<iframe src="${url}?autoplay=1&mute=0" allowfullscreen></iframe>`;
-        playerBox.scrollIntoView({behavior:'smooth', block: 'center'});
-      });
+    function toggleChatPopup() {
+        const pop = document.getElementById('chat-popup'); pop.style.display = (pop.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    document.querySelectorAll('.highlight-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const url = card.dataset.video, player = document.getElementById('highlightPlayer');
+            player.style.display = 'block'; player.innerHTML = `<iframe src="${url}?autoplay=1" allowfullscreen></iframe>`;
+            player.scrollIntoView({behavior:'smooth', block:'center'});
+        });
     });
 </script>
 
