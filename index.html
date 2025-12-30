@@ -18,7 +18,14 @@ body{margin:0;background: var(--dark-bg);color:#fff;overflow-x:hidden; -webkit-t
 a{text-decoration:none;color:inherit}
 img{width:100%;height:100%;object-fit:cover;display:block}
 
-.app{max-width:420px;margin:auto;padding-bottom: 100px; background: linear-gradient(180deg, #121212 0%, #1a1a1a 100%); min-height: 100vh;}
+.app {
+    max-width:420px;
+    margin:auto;
+    padding-bottom: 15px; /* ลดระยะขอบล่างสุด */
+    background: linear-gradient(180deg, #121212 0%, #1a1a1a 100%); 
+    min-height: auto; /* เอา 100vh ออกเพื่อให้จบตามเนื้อหาจริง */
+    position: relative;
+}
 
 .header{ 
     background: rgba(227, 154, 45, 0.95); 
@@ -75,6 +82,30 @@ img{width:100%;height:100%;object-fit:cover;display:block}
     100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 68, 68, 0); }
 }
 
+.banner-section { padding: 0 16px 5px 16px; margin-top: -10px; }
+.banner-wrapper {
+    display: block; width: 100%; height: auto;
+    background: #2a2a2a; border-radius: 12px;
+    overflow: hidden; position: relative;
+    border: 1px solid rgba(227, 154, 45, 0.4);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.banner-wrapper img { width: 100%; height: auto; display: block; }
+.banner-wrapper::after {
+    content: ''; position: absolute; top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+    transform: skewX(-25deg); animation: bannerShine 4s infinite;
+}
+@keyframes bannerShine {
+    0% { left: -100%; } 20% { left: 125%; } 100% { left: 125%; }
+}
+.ad-tag {
+    position: absolute; top: 5px; right: 5px;
+    background: rgba(0,0,0,0.5); color: #fff; font-size: 8px;
+    padding: 1px 5px; border-radius: 3px; z-index: 2; pointer-events: none;
+}
+
 #live-overlay { 
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
     background: #000; z-index: 9999; display: none; flex-direction: column; 
@@ -107,11 +138,14 @@ img{width:100%;height:100%;object-fit:cover;display:block}
         <div class="profile"></div>
     </div>
 
-    <div class="categories">
+  <div class="categories">
         <a class="active">🔥 โปรแกรมบอล</a>
-        <a>⭐ ทีเด็ดบอล</a>
-        <a>📡 ผลบอลสด</a>
-        <a>🎮 กีฬาอื่นๆ</a>
+        
+        <a href="https://t.me/+uG2hFOgg1aUyMGE1" target="_blank">💰 ทีเด็ดบอล</a>
+        
+        <a href="https://ballmun.net/ผลบอลสด" target="_blank">⚽ ผลบอลสด</a>
+        
+        <a href="https://ballmun.net/tv-online="_blank">🎮 กีฬาอื่นๆ</a>
     </div>
 
     <div class="section">
@@ -204,8 +238,13 @@ img{width:100%;height:100%;object-fit:cover;display:block}
         </div>
         <div class="highlight-player" id="highlightPlayer"></div>
     </div>
-</div>
-
+<div class="banner-section"><div class="banner-section">
+        <div class="section-title"><span></span></div>
+        <a href="https://your-link.com" target="_blank" class="banner-wrapper">
+            <span class="ad-tag">AD</span>
+            <img src="https://img5.pic.in.th/file/secure-sv1/115687fecf817f542c.png" alt="Promotion">
+        </a>
+    </div>
 <div id="chat-btn" onclick="toggleChatPopup()">💬 แชทสด (Live)</div>
 <div id="chat-popup">
     <div class="chat-pop-header" style="background:var(--primary); padding:10px; display:flex; justify-content:space-between; color:#000; font-weight:bold;">
@@ -279,6 +318,8 @@ img{width:100%;height:100%;object-fit:cover;display:block}
         document.getElementById('live-title').innerText = title.toUpperCase();
         document.getElementById('live-overlay').style.display = 'flex';
         const v = document.getElementById('m3u8-video'), f = document.getElementById('live-frame');
+
+
         if (url.includes('.m3u8')) {
             f.style.display = 'none'; v.style.display = 'block';
             if (Hls.isSupported()) {
@@ -309,3 +350,4 @@ img{width:100%;height:100%;object-fit:cover;display:block}
 
 </body>
 </html>
+
